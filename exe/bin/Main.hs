@@ -42,7 +42,9 @@ import           Examples.Pages.MainHeader      ( mainHeader
                                                 )
 import           Examples.Pages.Panels          ( panelsPage )
 import           Examples.Pages.RegistrationPage
-                                                ( registrationPage )
+                                                ( registrationPage
+                                                , signupPageAlt
+                                                )
 import           Examples.Pages.SigninPage      ( signinPage
                                                 , signinPageAlt
                                                 )
@@ -232,7 +234,8 @@ pages =
         , ( "datagrid.html"
           , ("Datagrid (application)", Dsl.SingletonCanvas App.datagrid)
           )
-        , ("register.html", ("Registration form", registrationPage))
+        , ("register.html"   , ("Registration form", registrationPage))
+        , ("signup--alt.html", ("Sign up form (website, alt)", signupPageAlt))
         , ( "tools-new-contract.html"
           , ("Tools, new contract", Dsl.SingletonCanvas App.toolsNewContract)
           )

@@ -145,7 +145,7 @@ signinPageAlt = Dsl.SingletonCanvas $ do
     $ H.div
     ! A.class_ "o-container"
     $ H.div
-    ! A.class_ "c-brand c-brand--small"
+    ! A.class_ "c-brand c-brand--xsmall"
     $ H.a
     ! A.href "/"
     $ H.img
