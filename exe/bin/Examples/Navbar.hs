@@ -1,6 +1,7 @@
 module Examples.Navbar
   ( navbars
   , exampleNavbar
+  , exampleNavbarAlt
   , exampleNavbarWebsite
   ) where
 
@@ -26,6 +27,9 @@ exampleNavbar = Navbar
   , Entry "Members" (Link "#")
   , Entry "Archive" (Link "#")
   ]
+
+exampleNavbarAlt :: Navbar
+exampleNavbarAlt = Navbar []
 
 exampleNavbarWebsite :: NavbarWebsite
 exampleNavbarWebsite = NavbarWebsite

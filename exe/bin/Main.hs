@@ -38,6 +38,7 @@ import           Examples.Pages.LandingPage     ( landingPage
                                                 , navigation
                                                 )
 import           Examples.Pages.MainHeader      ( mainHeader
+                                                , mainHeaderAlt
                                                 , mainHeaderWebsite
                                                 )
 import           Examples.Pages.Panels          ( panelsPage )
@@ -193,6 +194,9 @@ pages =
           , ("Main header (website)", mainHeaderWebsite)
           )
         , ("main-header.html", ("Main header (application)", mainHeader))
+        , ( "main-header--alt.html"
+          , ("Main header (application, alt)", mainHeaderAlt)
+          )
         , ("login.html"      , ("Sign in form (website)", signinPage))
         , ("login--alt.html" , ("Sign in form (website, alt)", signinPageAlt))
         , ("404-website.html", ("404 Not found (website)", notFoundWebsite))
