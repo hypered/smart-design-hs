@@ -82,33 +82,35 @@ library
     Smart.Html.Alert
     Smart.Html.AlertDialog
     Smart.Html.AlertStack
-    Smart.Html.Button
-    Smart.Html.Errors
-    Smart.Html.Slate
-    Smart.Html.Radio
     Smart.Html.Avatar
     Smart.Html.BorderedList
     Smart.Html.Brand
+    Smart.Html.Button
     Smart.Html.ButtonToolbar
-    Smart.Html.GlobalBanner
-    Smart.Html.Ruler
     Smart.Html.Card
     Smart.Html.Checkbox
+    Smart.Html.Errors
+    Smart.Html.FileAttachment
+    Smart.Html.FileUpload
     Smart.Html.Form
-    Smart.Html.Textarea
+    Smart.Html.GlobalBanner
+    Smart.Html.Grid
+    Smart.Html.IconList
     Smart.Html.Input
+    Smart.Html.KeyValue
     Smart.Html.Loader
     Smart.Html.Misc
     Smart.Html.Navbar
-    Smart.Html.Wizard
-    Smart.Html.IconList
-    Smart.Html.FileUpload
     Smart.Html.Panel
-    Smart.Html.StatusPill
-    Smart.Html.FileAttachment
+    Smart.Html.Radio
+    Smart.Html.Ruler
     Smart.Html.SideMenu
-    Smart.Html.KeyValue
-    Smart.Html.Grid
+    Smart.Html.Slate
+    Smart.Html.StatusPill
+    Smart.Html.Textarea
+    Smart.Html.Wizard
+
+    Smart.Html.Pages.LandingPage
 
     Smart.Html.Render
 
