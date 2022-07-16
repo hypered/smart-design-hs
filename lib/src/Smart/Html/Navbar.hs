@@ -50,35 +50,36 @@ data Action = Link Link | SubEntries [SubEntry]
 data SubEntry = SubEntry Title Link
 
 toNavbar tree = mapM_ toplevel (zip tree [1 ..])
- where
-  toplevel :: (Entry, Int) -> Html
-  toplevel (Entry a (Link lnk), _) =
-    H.li
-      ! A.class_ "c-pill-navigation__item"
-      $ H.a
-      ! A.href (H.toValue lnk)
-      $ H.toHtml a
-  toplevel (Entry a (SubEntries bs), n) =
-    H.li
-      ! A.class_
-          "c-pill-navigation__item c-pill-navigation__item--has-child-menu"
-      $ do
-          H.button
-            ! A.type_ "button"
-            ! customAttribute "data-menu" (H.toValue $ "subMenu-" ++ show n)
-            ! customAttribute "data-menu-samewidth" "true"
-            $ H.toHtml a
-          H.ul
-            ! A.class_ "c-menu c-menu--large"
-            ! A.id (H.toValue $ "subMenu-" ++ show n)
-            $ mapM_ sublevel bs
-  sublevel (SubEntry b lnk) =
-    H.li
-      ! A.class_ "c-menu__item"
-      $ H.a
-      ! A.class_ "c-menu__label"
-      ! A.href (H.toValue lnk)
-      $ H.toHtml b
+
+toplevel :: (Entry, Int) -> Html
+toplevel (Entry a (Link lnk), _) =
+  H.li
+    ! A.class_ "c-pill-navigation__item"
+    $ H.a
+    ! A.href (H.toValue lnk)
+    $ H.toHtml a
+toplevel (Entry a (SubEntries bs), n) =
+  H.li
+    ! A.class_ "c-pill-navigation__item c-pill-navigation__item--has-child-menu"
+    $ do
+        H.button
+          ! A.type_ "button"
+          ! customAttribute "data-menu" (H.toValue $ "subMenu-" ++ show n)
+          ! customAttribute "data-menu-samewidth" "true"
+          $ H.toHtml a
+        H.ul
+          ! A.class_ "c-menu c-menu--large"
+          ! A.id (H.toValue $ "subMenu-" ++ show n)
+          $ mapM_ sublevel bs
+
+sublevel :: SubEntry -> Html
+sublevel (SubEntry b lnk) =
+  H.li
+    ! A.class_ "c-menu__item"
+    $ H.a
+    ! A.class_ "c-menu__label"
+    ! A.href (H.toValue lnk)
+    $ H.toHtml b
 
 navbar tree =
   H.header
