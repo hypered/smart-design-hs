@@ -3,6 +3,7 @@ module Smart.Html.Navbar
   , NavbarWebsite(..)
   , Action(..)
   , Entry(..)
+  , RightEntry(..)
   , SubEntry(..)
   , mkNavbar
   , mkNavbarWebsite
@@ -25,7 +26,7 @@ import qualified Text.Blaze.Html5              as H
 import qualified Text.Blaze.Html5.Attributes   as A
 
 -- | A navigation bar for the application.
-newtype Navbar = Navbar [Entry]
+data Navbar = Navbar [Entry] [RightEntry]
 
 instance H.ToMarkup Navbar where
   toMarkup = mkNavbar
@@ -36,18 +37,27 @@ newtype NavbarWebsite = NavbarWebsite [Entry]
 instance H.ToMarkup NavbarWebsite where
   toMarkup = mkNavbarWebsite
 
-mkNavbar (Navbar entries) = navbar entries
+mkNavbar (Navbar entries items) = navbar entries items
 
 mkNavbarWebsite (NavbarWebsite entries) = navbarWebsite entries
 
--- An entry has a name, then either a link or subentries.
+-- A textual entry has a name, then either a link or subentries.
 data Entry = Entry Title Action
 
--- This represents either a link or subentries (associated to an entry).
+-- This represents either a link, subentries (associated to an entry), or a
+-- search bar.
 data Action = Link Link | SubEntries [SubEntry]
 
--- A subentry is just a pair name, link.
-data SubEntry = SubEntry Title Link
+-- The SearchEntry and UserEntry don't have a c-pill-navigation__item around
+-- them, otherwise, this could be part of the Entry data type instead of a
+-- separate one.
+-- UserEntry can use a button, but the rendering is not correctly aligned,
+-- maybe this could be fixed in CSS.
+data RightEntry = HelpEntry [SubEntry] | SearchEntry | UserEntry [SubEntry] AvatarImage
+
+-- A subentry is just a triple (name, link, is-external-link), or horizontal
+-- dividing rule.
+data SubEntry = SubEntry Title Link Bool | Divider
 
 toNavbar tree = mapM_ toplevel (zip tree [1 ..])
 
@@ -72,16 +82,58 @@ toplevel (Entry a (SubEntries bs), n) =
           ! A.id (H.toValue $ "subMenu-" ++ show n)
           $ mapM_ sublevel bs
 
+toplevel' :: RightEntry -> Html
+toplevel' e = case e of
+  HelpEntry bs ->
+    H.nav
+      $ H.ul
+      ! A.class_ "c-pill-navigation"
+      $ H.li
+      ! A.class_
+          "c-pill-navigation__item c-pill-navigation__item--has-child-menu"
+      $ do
+          H.button
+            ! A.type_ "button"
+            ! customAttribute "data-menu" "helpMenu"
+            $ do
+                H.div
+                  ! A.class_ "o-svg-icon o-svg-icon-circle-help  "
+                  $ H.toMarkup svgIconCircleHelp
+                H.span ! A.class_ "u-sr-accessible" $ "Help"
+          H.ul ! A.class_ "c-menu c-menu--large" ! A.id "helpMenu" $ mapM_
+            sublevel
+            bs
+  SearchEntry -> H.div ! A.class_ "c-input-with-icon" $ do
+    H.div ! A.class_ "o-svg-icon o-svg-icon-search  " $ H.toMarkup svgIconSearch
+    H.input ! A.class_ "c-input" ! A.type_ "text" ! A.placeholder "Search ..."
+  UserEntry bs avatarImage -> do
+    H.a
+      ! A.class_ "c-user-navigation"
+      ! A.href "#"
+      ! customAttribute "data-menu" "userMenu"
+      $ H.toMarkup
+      $ Avatar avatarImage
+               Regular
+               AvNoAdditionalContent
+    H.ul ! A.class_ "c-menu c-menu--large" ! A.id "userMenu" $ mapM_ sublevel bs
+
 sublevel :: SubEntry -> Html
-sublevel (SubEntry b lnk) =
+sublevel (SubEntry b lnk externalLink) =
   H.li
     ! A.class_ "c-menu__item"
     $ H.a
     ! A.class_ "c-menu__label"
     ! A.href (H.toValue lnk)
-    $ H.toHtml b
+    $ if externalLink
+        then do
+          H.span $ H.toHtml b
+          H.div ! A.class_ "o-svg-icon o-svg-icon-external-link  " $ H.toMarkup
+            svgIconExternalLink
+        else H.toHtml b
+sublevel Divider =
+  H.li ! A.class_ "c-menu__divider" ! A.role "presentational" $ ""
 
-navbar tree =
+navbar tree items =
   H.header
     $ H.div
     ! A.class_ "c-navbar c-navbar--bordered-bottom c-navbar--fixed"
@@ -90,75 +142,7 @@ navbar tree =
           $ BrandXSmall "/" "https://design.smart.coop/images/logo.svg" "Smart"
         , H.nav $ H.ul ! A.class_ "c-pill-navigation" $ toNavbar tree
         ]
-        [ H.nav
-        $ H.ul
-        ! A.class_ "c-pill-navigation"
-        $ H.li
-        ! A.class_
-            "c-pill-navigation__item c-pill-navigation__item--has-child-menu"
-        $ do
-            H.button
-              ! A.type_ "button"
-              ! customAttribute "data-menu" "helpMenu"
-              $ do
-                  H.div
-                    ! A.class_ "o-svg-icon o-svg-icon-circle-help  "
-                    $ H.toMarkup svgIconCircleHelp
-                  H.span ! A.class_ "u-sr-accessible" $ "Help"
-            H.ul ! A.class_ "c-menu c-menu--large" ! A.id "helpMenu" $ do
-              H.li
-                ! A.class_ "c-menu__item"
-                $ H.a
-                ! A.class_ "c-menu__label"
-                ! A.href "#"
-                $ "About this page"
-              H.li ! A.class_ "c-menu__divider" ! A.role "presentational" $ ""
-              H.li
-                ! A.class_ "c-menu__item"
-                $ H.a
-                ! A.class_ "c-menu__label"
-                ! A.href "#"
-                $ do
-                    H.span "Documentation"
-                    H.div
-                      ! A.class_ "o-svg-icon o-svg-icon-external-link  "
-                      $ H.toMarkup svgIconExternalLink
-              H.li
-                ! A.class_ "c-menu__item"
-                $ H.a
-                ! A.class_ "c-menu__label"
-                ! A.href "#"
-                $ "Report a bug"
-        , H.div ! A.class_ "c-input-with-icon" $ do
-          H.div ! A.class_ "o-svg-icon o-svg-icon-search  " $ H.toMarkup
-            svgIconSearch
-          H.input ! A.class_ "c-input" ! A.type_ "text" ! A.placeholder
-            "Search ..."
-        , do
-          H.a
-            ! A.class_ "c-user-navigation"
-            ! A.href "#"
-            ! customAttribute "data-menu" "userMenu"
-            $ H.toMarkup
-            $ Avatar
-                (AvatarImage "https://design.smart.coop/images/avatars/1.jpg")
-                Regular
-                AvNoAdditionalContent
-          H.ul ! A.class_ "c-menu c-menu--large" ! A.id "userMenu" $ do
-            H.li
-              ! A.class_ "c-menu__item"
-              $ H.a
-              ! A.class_ "c-menu__label"
-              ! A.href "#"
-              $ "My profile"
-            H.li ! A.class_ "c-menu__divider" ! A.role "presentational" $ ""
-            H.li
-              ! A.class_ "c-menu__item"
-              $ H.a
-              ! A.class_ "c-menu__label"
-              ! A.href "#"
-              $ "Sign out"
-        ]
+        (map toplevel' items)
 
 navbarWebsite tree =
   H.header
