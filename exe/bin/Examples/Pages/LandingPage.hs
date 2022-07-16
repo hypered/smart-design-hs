@@ -16,7 +16,7 @@ landingPage :: HtmlCanvas
 landingPage = Dsl.SingletonCanvas $ do
   H.toMarkup navigation
   landing
-  Misc.landingFooter "https://github.com/smartcoop/design-hs"
+  Misc.landingFooter "https://github.com/hypered/smart-design-hs"
 
 navigation :: NavbarWebsite
 navigation = NavbarWebsite
@@ -33,7 +33,7 @@ landing = H.main ! A.class_ "o-container o-container--flex" $ do
     Misc.landingPanel "Open source" $ H.p $ do
       "Just like the reference implementation, this project is open source "
       "and available "
-      H.a ! A.href "https://github.com/smartcoop/design-hs" $ "on GitHub"
+      H.a ! A.href "https://github.com/hypered/smart-design-hs" $ "on GitHub"
       "."
     Misc.landingPanel "Experimental" $ H.p $ do
       "Haskell is not used in production at Smart. Instead an experiment "

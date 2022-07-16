@@ -16,11 +16,11 @@ jobs:
     - name: Build the static site
       run: nix-build -A design-hs-html
     - name: Create the webdir.
-      run: scripts/build.sh
+      run: mkdir _site
     - name: Copy nix build results
       run: cp -r result/html/* _site/
     - name: Add CNAME
-      run: echo design-hs.smartcoop.xyz > _site/CNAME
+      run: echo design.smartcoop.sh > _site/CNAME
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:

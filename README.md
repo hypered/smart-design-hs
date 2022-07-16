@@ -9,9 +9,9 @@ is written with `blaze-html`. The executable is used to recreate components and
 example pages.
 
 A [GitHub
-Action](https://github.com/smartcoop/design-hs/blob/main/.github/workflows/deployment.yml)
+Action](https://github.com/hypered/smart-design-hs/blob/main/.github/workflows/deployment.yml)
 is setup to generate pages and serve them at
-[design-hs.smartcoop.xyz](https://design-hs.smartcoop.xyz/).
+[design.smartcoop.sh](https://design.smartcoop.sh/).
 
 ## The structure
 
