@@ -47,10 +47,11 @@ common common-dependencies
     , blaze-svg
 
     , containers
+    , http-types
 
     -- Characters
-    , text
     , bytestring
+    , text
 
     -- Control
     , lens
