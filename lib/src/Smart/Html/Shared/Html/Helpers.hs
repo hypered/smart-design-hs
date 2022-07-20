@@ -3,9 +3,16 @@ module Smart.Html.Shared.Html.Helpers
   ( multiNestedClassedElems
   , classedElem
   , unorderedList
+  , mkButton
   ) where
 
 import qualified Data.Text                     as T
+import           Network.HTTP.Types.Method      ( StdMethod
+                                                , renderStdMethod
+                                                )
+import qualified Smart.Html.Button             as Btn
+import qualified Smart.Html.Shared.Types       as HTypes
+import           Text.Blaze.Html5               ( (!) )
 import qualified Text.Blaze.Html5              as H
 import qualified Text.Blaze.Html5.Attributes   as A
 
@@ -44,3 +51,9 @@ classedElem mkElem classes inner = mkElem inner H.! A.class_ classesConcat
 
 unorderedList :: Foldable f => f H.Html -> H.Html
 unorderedList = H.ul . mapM_ H.li . toList
+
+mkButton :: HTypes.Title -> H.AttributeValue -> StdMethod -> H.Markup
+mkButton text submitUrl method' =
+  H.toMarkup (Btn.ButtonPrimary text HTypes.Enabled)
+    ! A.formaction submitUrl
+    ! A.formmethod (H.textValue . decodeUtf8 $ renderStdMethod method')
