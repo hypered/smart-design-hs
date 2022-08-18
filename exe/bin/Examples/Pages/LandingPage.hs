@@ -36,5 +36,6 @@ landing = H.main ! A.class_ "o-container o-container--flex" $ do
       H.a ! A.href "https://github.com/hypered/smart-design-hs" $ "on GitHub"
       "."
     Misc.landingPanel "Experimental" $ H.p $ do
-      "Haskell is not used in production at Smart. Instead an experiment "
-      "is in progress to see if using it to write prototypes is useful."
+      "Haskell is not used in production at Smart. It is only used on a"
+      H.a ! A.href "https://github.com/hypered/curiosity" $ "prototype"
+      "application."
