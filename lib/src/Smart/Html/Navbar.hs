@@ -56,8 +56,8 @@ data Action = Link Link | SubEntries [SubEntry]
 data RightEntry = HelpEntry [SubEntry] | SearchEntry | UserEntry [SubEntry] AvatarImage
 
 -- A subentry is just a triple (name, link, is-external-link), or horizontal
--- dividing rule.
-data SubEntry = SubEntry Title Link Bool | Divider
+-- dividing rule, or a "signed-in as" information item.
+data SubEntry = SubEntry Title Link Bool | Divider | SignedInAs Text
 
 toNavbar tree = mapM_ toplevel (zip tree [1 ..])
 
@@ -130,8 +130,18 @@ sublevel (SubEntry b lnk externalLink) =
           H.div ! A.class_ "o-svg-icon o-svg-icon-external-link  " $ H.toMarkup
             svgIconExternalLink
         else H.toHtml b
+
 sublevel Divider =
   H.li ! A.class_ "c-menu__divider" ! A.role "presentational" $ ""
+
+sublevel (SignedInAs name) =
+  H.li ! A.class_ "c-menu__info" $
+    H.div ! A.class_ "c-avatar-and-text" $ do
+      H.div ! A.class_ "c-avatar c-avatar--img" $
+        H.toMarkup svgIconUser
+      H.div ! A.class_ "c-avatar-and-text__text" $ do
+        H.p "Signed in as"
+        H.strong $ H.toHtml name
 
 navbar tree items =
   H.header
