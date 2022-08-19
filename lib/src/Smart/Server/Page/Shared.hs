@@ -61,7 +61,6 @@ withPageHeading html =
     $  charset
     >> viewport
     >> maincss
-    >> protocss
     >> custscss
     >> html
  where
@@ -69,7 +68,6 @@ withPageHeading html =
   viewport =
     H.meta ! A.name "viewport" ! A.content "width=device-width, initial-scale=1"
   maincss  = stylesheet "main.css"
-  protocss = stylesheet "prototype.css"
   custscss = stylesheet "styleguide-customizations.css"
   stylesheet file = H.link ! A.rel "stylesheet" ! A.href
     ("/static/css/" <> file)

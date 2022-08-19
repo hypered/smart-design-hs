@@ -52,7 +52,6 @@ smartDesignHead =
     >> title
     >> description
     >> maincss
-    >> protocss
     >> custscss
  where
   charset = H.meta ! A.charset "utf-8"
@@ -65,7 +64,6 @@ smartDesignHead =
       ! A.content
           "Curiosity is an ever-evolving prototype system to think, discuss, and communicate the future of Smart Belgium's developments."
   maincss  = stylesheet "main.css"
-  protocss = stylesheet "prototype.css"
   custscss = stylesheet "styleguide-customizations.css"
   stylesheet file =
     H.link ! A.rel "stylesheet" ! A.href ("/static/css/" <> file)
