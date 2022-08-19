@@ -24,6 +24,11 @@ module Smart.Html.Misc
   , js
   ) where
 
+import           Smart.Html.Navbar              ( Action(..)
+                                                , Entry(..)
+                                                , toNavbarDesktop
+                                                , toNavbarMobile
+                                                )
 import           Smart.Html.Shared.Html.Icons
 import           Text.Blaze                     ( customAttribute )
 import qualified Text.Blaze.Html5              as H
@@ -1504,25 +1509,13 @@ myHeader =
                       ! A.class_ "o-svg-icon o-svg-icon-close  "
                       $ H.toMarkup svgIconClose
                     H.div ! A.class_ "u-sr-accessible" $ "Close menu"
-              H.div ! A.class_ "c-design-system-nav__mobile" $ H.ul $ do
-                H.li $ do
-                  H.a ! A.href "/components/" $ "Components"
-                H.li $ H.a ! A.href "/pages/" $ "Pages"
-              H.div
-                ! A.class_ "c-design-system-nav__desktop"
-                $ H.ul
-                ! A.class_ "c-pill-navigation"
-                $ do
-                    H.li
-                      ! A.class_ "c-pill-navigation__item"
-                      $ H.a
-                      ! A.href "/components/"
-                      $ "Components"
-                    H.li
-                      ! A.class_ "c-pill-navigation__item"
-                      $ H.a
-                      ! A.href "/pages/"
-                      $ "Pages"
+              toNavbarMobile entries
+              toNavbarDesktop entries
+
+entries =
+  [ Entry "Components" (Link "/components/")
+  , Entry "Pages"  (Link "/pages/")
+  ]
 
 myFooter =
   H.footer
