@@ -24,12 +24,14 @@ module Smart.Html.Misc
   , js
   ) where
 
+import           Smart.Html.Layout
 import           Smart.Html.Navbar              ( Action(..)
                                                 , Entry(..)
                                                 , hamburgerMenu
                                                 , toNavbarDesktop
                                                 , toNavbarMobile
                                                 )
+import           Smart.Html.SideMenu            ( SideMenu(..), SideMenuItem(..) )
 import           Smart.Html.Shared.Html.Icons
 import           Text.Blaze                     ( customAttribute )
 import qualified Text.Blaze.Html5              as H
@@ -411,25 +413,6 @@ inputRadios name label labels = H.div ! A.class_ "o-form-group" $ do
 
 
 --------------------------------------------------------------------------------
-mainContent top content =
-  H.main ! A.class_ "u-scroll-wrapper u-maximize-width" $ do
-    top
-    H.div ! A.class_ "u-scroll-wrapper-body" $ content
-
-mainContentSideMenu menu top content =
-  H.main ! A.class_ "u-scroll-wrapper u-maximize-width" $ do
-    H.div ! A.class_ "c-app-layout-inner" $ do
-      H.div ! A.class_ "c-app-layout-inner__sidebar" $ menu
-      H.div
-        ! A.class_ "c-app-layout-inner__content"
-        $ H.div
-        ! A.class_ "u-scroll-wrapper"
-        $ do
-            top
-            H.div ! A.class_ "u-scroll-wrapper-body" $ content
-
-
---------------------------------------------------------------------------------
 toolbar =
   H.div
     ! A.class_ "c-navbar c-navbar--bordered-bottom"
@@ -525,37 +508,14 @@ titlebar title =
 
 
 --------------------------------------------------------------------------------
-menu = H.ul ! A.class_ "c-side-menu" $ do
-  H.li
-    ! A.class_ "c-side-menu__item c-side-menu__item--active"
-    $ H.a
-    ! A.class_ "c-side-menu__link"
-    ! A.href "#"
-    $ do
-        H.div
-          ! A.class_ "o-svg-icon o-svg-icon-document  "
-          $ H.toMarkup
-          $ svgIconDocument
-        H.div ! A.class_ "c-sidebar-item__label" $ "Quotes & invoices"
-  H.li
-    ! A.class_ "c-side-menu__item"
-    $ H.a
-    ! A.class_ "c-side-menu__link"
-    ! A.href "#"
-    $ do
-        H.div
-          ! A.class_ "o-svg-icon o-svg-icon-bills  "
-          $ H.toMarkup
-          $ svgIconBills
-        H.div ! A.class_ "c-sidebar-item__label" $ "Funding"
-  H.li
-    ! A.class_ "c-side-menu__item"
-    $ H.a
-    ! A.class_ "c-side-menu__link"
-    ! A.href "#"
-    $ do
-        H.div ! A.class_ "o-svg-icon o-svg-icon-tag  " $ H.toMarkup $ svgIconTag
-        H.div ! A.class_ "c-sidebar-item__label" $ "Expenses"
+menu :: SideMenu
+menu =
+  SideMenuWithActive
+    []
+    ( SideMenuItem "Quotes & invoices" "#" )
+    [ SideMenuItem "Funding" "#"
+    , SideMenuItem "Expenses" "#"
+    ]
 
 
 --------------------------------------------------------------------------------
