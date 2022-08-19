@@ -9,7 +9,12 @@ import           Examples.Navbar                ( exampleNavbar
                                                 , exampleNavbarWebsite
                                                 )
 import           Smart.Html.Dsl
-import           Smart.Html.Navbar              ( navbarWebsite' )
+import           Smart.Html.Navbar              ( Action(..)
+                                                , Entry(..)
+                                                , SubEntry(..)
+                                                , navbarWebsite'
+                                                , toNavbarDesktop
+                                                )
 import           Smart.Html.Shared.Html.Icons
 import           Text.Blaze                     ( customAttribute )
 import qualified Text.Blaze.Html5              as H
@@ -96,105 +101,33 @@ navigation' = navbarWebsite' $ H.nav ! A.class_ "c-design-system-nav" $ do
       $ "Components"
     H.li $ H.a ! A.href "/blog/index.html" $ "Blog"
     H.li $ H.a ! A.href "/changelog.html" $ "Changelog"
-  H.div
-    ! A.class_ "c-design-system-nav__desktop"
-    $ H.ul
-    ! A.class_ "c-pill-navigation"
-    $ do
-        H.li
-          ! A.class_
-              "c-pill-navigation__item c-pill-navigation__item--has-child-menu"
-          $ do
-              H.button
-                ! A.type_ "button"
-                ! customAttribute "data-menu"           "menu1"
-                ! customAttribute "data-menu-samewidth" "true"
-                $ "Design"
-              H.ul ! A.class_ "c-menu c-menu--large" ! A.id "menu1" $ do
-                H.li
-                  ! A.class_ "c-menu__item"
-                  $ H.a
-                  ! A.class_ "c-menu__label"
-                  ! A.href "/design/how-it-works.html"
-                  $ "Design workflow"
-                H.li
-                  ! A.class_ "c-menu__item"
-                  $ H.a
-                  ! A.class_ "c-menu__label"
-                  ! A.href "/design/in-practice/copywriting.html"
-                  $ "Design system in practice"
-        H.li
-          ! A.class_
-              "c-pill-navigation__item c-pill-navigation__item--has-child-menu"
-          $ do
-              H.button
-                ! A.type_ "button"
-                ! customAttribute "data-menu"           "menu2"
-                ! customAttribute "data-menu-samewidth" "true"
-                $ "Development"
-              H.ul ! A.class_ "c-menu c-menu--large" ! A.id "menu2" $ do
-                H.li
-                  ! A.class_ "c-menu__item"
-                  $ H.a
-                  ! A.class_ "c-menu__label"
-                  ! A.href "/development/getting-started.html"
-                  $ "Getting started"
-                H.li
-                  ! A.class_ "c-menu__item"
-                  $ H.a
-                  ! A.class_ "c-menu__label"
-                  ! A.href "/development/example-pages.html"
-                  $ "Example pages"
-                H.li
-                  ! A.class_ "c-menu__item"
-                  $ H.a
-                  ! A.class_ "c-menu__label"
-                  ! A.href "/prototypes/index.html"
-                  $ "Prototypes"
-                H.li
-                  ! A.class_ "c-menu__item"
-                  $ H.a
-                  ! A.class_ "c-menu__label"
-                  ! A.href "/development/package-and-repo-links.html"
-                  $ "Package and repo links"
-                H.li
-                  ! A.class_ "c-menu__divider"
-                  ! A.role "presentational"
-                  $ mempty
-                H.li
-                  ! A.class_ "c-menu__item"
-                  $ H.a
-                  ! A.class_ "c-menu__label"
-                  ! A.href "/development/browser-support.html"
-                  $ "Browser support"
-                H.li
-                  ! A.class_ "c-menu__divider"
-                  ! A.role "presentational"
-                  $ mempty
-                H.li
-                  ! A.class_ "c-menu__item"
-                  $ H.a
-                  ! A.class_ "c-menu__label"
-                  ! A.href "/development/writing-css/architecture.html"
-                  $ "CSS architecture"
-                H.li
-                  ! A.class_ "c-menu__item"
-                  $ H.a
-                  ! A.class_ "c-menu__label"
-                  ! A.href "/development/writing-css/component-structure.html"
-                  $ "CSS component structure"
-        H.li
-          ! A.class_ "c-pill-navigation__item"
-          $ H.a
-          ! A.href "/development/component-documentation.html"
-          $ "Components"
-        H.li
-          ! A.class_ "c-pill-navigation__item"
-          $ H.a
-          ! A.href "/blog/index.html"
-          $ "Blog"
-        H.li
-          ! A.class_ "c-pill-navigation__item"
-          $ H.a
-          ! A.href "/changelog.html"
-          $ "Changelog"
+  toNavbarDesktop entries
+
+entries =
+  [ Entry "Design" $ SubEntries
+    [ SubEntry "Design workflow" "/design/how-it-works.html" False
+    , SubEntry "Design system in practice"
+               "/design/in-practice/copywriting.html"
+               False
+    ]
+  , Entry "Development" $ SubEntries
+    [ SubEntry "Getting started" "/development/getting-started.html" False
+    , SubEntry "Example pages"   "/development/example-pages.html"   False
+    , SubEntry "Prototypes"      "/prototypes/index.html"            False
+    , SubEntry "Package and repo links"
+               "/development/package-and-repo-links.html"
+               False
+    , Divider
+    , SubEntry "Browser support" "/development/browser-support.html" False
+    , Divider
+    , SubEntry "CSS architecture"
+               "/development/writing-css/architecture.html"
+               False
+    , SubEntry "CSS component structure"
+               "/development/writing-css/component-structure.html"
+               False
+    ]
+  , Entry "Components" (Link "/development/component-documentation.html")
+  , Entry "Blog"       (Link "/blog/index.html")
+  , Entry "Changelog"  (Link "/changelog.html")
+  ]

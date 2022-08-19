@@ -8,6 +8,7 @@ module Smart.Html.Navbar
   , mkNavbar
   , mkNavbarWebsite
   , toNavbar
+  , toNavbarDesktop
   , navbar
   , navbarWebsite
   , navbarWebsite'
@@ -59,6 +60,13 @@ data RightEntry = HelpEntry [SubEntry] | SearchEntry | UserEntry [SubEntry] Avat
 -- A subentry is just a triple (name, link, is-external-link), or horizontal
 -- dividing rule, or a "signed-in as" information item.
 data SubEntry = SubEntry Title Link Bool | Divider | SignedInAs Text
+
+toNavbarDesktop tree =
+  H.div
+    ! A.class_ "c-design-system-nav__desktop"
+    $ H.ul
+    ! A.class_ "c-pill-navigation"
+    $ toNavbar tree
 
 toNavbar tree = mapM_ toplevel (zip tree [1 ..])
 
