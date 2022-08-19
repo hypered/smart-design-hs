@@ -99,6 +99,7 @@ library
     Smart.Html.IconList
     Smart.Html.Input
     Smart.Html.KeyValue
+    Smart.Html.Layout
     Smart.Html.Loader
     Smart.Html.Misc
     Smart.Html.Navbar

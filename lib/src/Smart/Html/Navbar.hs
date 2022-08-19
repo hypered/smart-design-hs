@@ -7,9 +7,13 @@ module Smart.Html.Navbar
   , SubEntry(..)
   , mkNavbar
   , mkNavbarWebsite
+  , hamburgerMenu
   , toNavbar
+  , toNavbarDesktop
+  , toNavbarMobile
   , navbar
   , navbarWebsite
+  , navbarWebsite'
   ) where
 
 import           Smart.Html.Avatar
@@ -58,6 +62,30 @@ data RightEntry = HelpEntry [SubEntry] | SearchEntry | UserEntry [SubEntry] Avat
 -- A subentry is just a triple (name, link, is-external-link), or horizontal
 -- dividing rule, or a "signed-in as" information item.
 data SubEntry = SubEntry Title Link Bool | Divider | SignedInAs Text
+
+toNavbarDesktop tree =
+  H.div
+    ! A.class_ "c-design-system-nav__desktop"
+    $ H.ul
+    ! A.class_ "c-pill-navigation"
+    $ toNavbar tree
+
+toNavbarMobile tree =
+  H.div ! A.class_ "c-design-system-nav__mobile" $ H.ul $ mapM_
+    toplevelMobile
+    (zip tree [1 ..])
+
+toplevelMobile (Entry a (Link lnk), _) =
+  H.li $ H.a ! A.href (H.toValue lnk) $ H.toHtml a
+toplevelMobile (Entry a (SubEntries bs), n) = H.li $ do
+  H.span $ H.toHtml a
+  H.ul $ do
+    mapM_ sublevelMobile bs
+
+sublevelMobile (SubEntry b lnk _) =
+  H.li $ H.a ! A.href (H.toValue lnk) $ H.toHtml b
+sublevelMobile Divider        = mempty
+sublevelMobile (SignedInAs _) = mempty -- TODO
 
 toNavbar tree = mapM_ toplevel (zip tree [1 ..])
 
@@ -112,9 +140,7 @@ toplevel' e = case e of
       ! A.href "#"
       ! customAttribute "data-menu" "userMenu"
       $ H.toMarkup
-      $ Avatar avatarImage
-               Regular
-               AvNoAdditionalContent
+      $ Avatar avatarImage Regular AvNoAdditionalContent
     H.ul ! A.class_ "c-menu c-menu--large" ! A.id "userMenu" $ mapM_ sublevel bs
 
 sublevel :: SubEntry -> Html
@@ -135,13 +161,11 @@ sublevel Divider =
   H.li ! A.class_ "c-menu__divider" ! A.role "presentational" $ ""
 
 sublevel (SignedInAs name) =
-  H.li ! A.class_ "c-menu__info" $
-    H.div ! A.class_ "c-avatar-and-text" $ do
-      H.div ! A.class_ "c-avatar c-avatar--img" $
-        H.toMarkup svgIconUser
-      H.div ! A.class_ "c-avatar-and-text__text" $ do
-        H.p "Signed in as"
-        H.strong $ H.toHtml name
+  H.li ! A.class_ "c-menu__info" $ H.div ! A.class_ "c-avatar-and-text" $ do
+    H.div ! A.class_ "c-avatar c-avatar--img" $ H.toMarkup svgIconUser
+    H.div ! A.class_ "c-avatar-and-text__text" $ do
+      H.p "Signed in as"
+      H.strong $ H.toHtml name
 
 navbar tree items =
   H.header
@@ -149,12 +173,18 @@ navbar tree items =
     ! A.class_ "c-navbar c-navbar--bordered-bottom c-navbar--fixed"
     $ toolbar
         [ H.toMarkup
-          $ BrandXSmall "/" "https://design.smart.coop/images/logo.svg" "Smart"
+          $ BrandXSmall "/" "/static/images/logo.svg" "Smart"
         , H.nav $ H.ul ! A.class_ "c-pill-navigation" $ toNavbar tree
         ]
         (map toplevel' items)
 
 navbarWebsite tree =
+  navbarWebsite' $ H.nav ! A.class_ "c-design-system-nav" $ do
+    hamburgerMenu
+    toNavbarMobile tree
+    toNavbarDesktop tree
+
+navbarWebsite' content =
   H.header
     $ H.div
     ! A.class_ "o-container"
@@ -162,11 +192,33 @@ navbarWebsite tree =
     ! A.class_ "c-navbar c-navbar--bordered-bottom c-navbar--main"
     $ toolbar
         [ H.toMarkup
-            $ BrandSmall "/" "https://design.smart.coop/images/logo.svg" "Smart"
+            $ BrandSmall "/" "/static/images/logo.svg" "Smart"
         ]
-        [H.nav $ H.ul ! A.class_ "c-pill-navigation" $ toNavbar tree]
+        [content]
 
 toolbar leftItems rightItems = H.div ! A.class_ "c-toolbar" $ do
   H.div ! A.class_ "c-toolbar__left" $ mapM_ item leftItems
   H.div ! A.class_ "c-toolbar__right" $ mapM_ item rightItems
   where item = H.div ! A.class_ "c-toolbar__item"
+
+hamburgerMenu = do
+  H.button
+    ! A.class_
+        "c-button c-button--borderless c-button--icon c-design-system-nav-open"
+    ! A.type_ "button"
+    ! A.id "c-design-system-nav-open"
+    $ H.span
+    ! A.class_ "c-button__content"
+    $ do
+        H.div ! A.class_ "o-svg-icon o-svg-icon-menu" $ H.toMarkup svgIconMenu
+        H.div ! A.class_ "u-sr-accessible" $ "Open menu"
+  H.button
+    ! A.class_
+        "c-button c-button--borderless c-button--icon c-design-system-nav-close"
+    ! A.type_ "button"
+    ! A.id "c-design-system-nav-close"
+    $ H.span
+    ! A.class_ "c-button__content"
+    $ do
+        H.div ! A.class_ "o-svg-icon o-svg-icon-close" $ H.toMarkup svgIconClose
+        H.div ! A.class_ "u-sr-accessible" $ "Close menu"

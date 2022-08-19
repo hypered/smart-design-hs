@@ -13,17 +13,31 @@ let
   # Examples are built under a subdirectory of outputDir
   outputDir = "html";
 
-in pkgs.stdenv.mkDerivation {
+in
+{
+  design-hs-html = pkgs.stdenv.mkDerivation {
+    inherit system;
 
-  inherit system;
+    name = "design-hs-html";
+    src = ./.;
+    buildInputs = [ exe ];
+    installPhase = ''
+      mkdir -p $out/${outputDir} # create the output directory.
+      # The haskell side ensures all subdirectories are created on the fly.
+      ${exe}/bin/design-hs-exe --output-dir $out/${outputDir}
+      cp -r static $out/html/
+      cp static/favicon.ico $out/html/
+    '';
+  };
 
-  name = "design-hs-html";
-  src = ./.;
-  buildInputs = [ exe ]; 
-  installPhase = '' 
-    mkdir -p $out/${outputDir} # create the output directory. 
-    # The haskell side ensures all subdirectories are created on the fly. 
-    ${exe}/bin/design-hs-exe --output-dir $out/${outputDir}
-  '';             
+  static = pkgs.stdenv.mkDerivation {
+    inherit system;
 
+    name = "static";
+    src = ./static;
+    installPhase = ''
+      mkdir -p $out/
+      cp -r . $out/
+    '';
+  };
 }

@@ -9,6 +9,16 @@ import           Examples.Navbar                ( exampleNavbar
                                                 , exampleNavbarWebsite
                                                 )
 import           Smart.Html.Dsl
+import           Smart.Html.Navbar              ( Action(..)
+                                                , Entry(..)
+                                                , SubEntry(..)
+                                                , hamburgerMenu
+                                                , navbarWebsite'
+                                                , toNavbarDesktop
+                                                , toNavbarMobile
+                                                )
+import           Smart.Html.Shared.Html.Icons
+import           Text.Blaze                     ( customAttribute )
 import qualified Text.Blaze.Html5              as H
 import           Text.Blaze.Html5               ( (!) )
 import qualified Text.Blaze.Html5.Attributes   as A

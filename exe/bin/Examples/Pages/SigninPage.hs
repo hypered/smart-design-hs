@@ -23,7 +23,7 @@ signinPage = Dsl.SingletonCanvas $ do
     $ H.a
     ! A.href "/"
     $ H.img
-    ! A.src "https://design.smart.coop/images/logo.svg"
+    ! A.src "/static/images/logo.svg"
     ! A.alt "Smart"
   H.main
     ! A.class_ "o-container-vertical"
@@ -149,7 +149,7 @@ signinPageAlt = Dsl.SingletonCanvas $ do
     $ H.a
     ! A.href "/"
     $ H.img
-    ! A.src "https://design.smart.coop/images/logo.svg"
+    ! A.src "/static/images/logo.svg"
     ! A.alt "Smart"
   H.main
     ! A.class_ "o-container-vertical"

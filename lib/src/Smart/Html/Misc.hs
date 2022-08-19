@@ -24,6 +24,14 @@ module Smart.Html.Misc
   , js
   ) where
 
+import           Smart.Html.Layout
+import           Smart.Html.Navbar              ( Action(..)
+                                                , Entry(..)
+                                                , hamburgerMenu
+                                                , toNavbarDesktop
+                                                , toNavbarMobile
+                                                )
+import           Smart.Html.SideMenu            ( SideMenu(..), SideMenuItem(..) )
 import           Smart.Html.Shared.Html.Icons
 import           Text.Blaze                     ( customAttribute )
 import qualified Text.Blaze.Html5              as H
@@ -74,7 +82,7 @@ landingImage =
     $ H.div
     ! A.class_ "c-design-system-home-illustration"
     $ H.img
-    ! A.src "https://design.smart.coop/images/illustration-form.png"
+    ! A.src "/static/images/illustration-form.png"
     ! A.alt ""
 
 landingFooter githubLink =
@@ -159,14 +167,14 @@ pageWithDialog = document "Smart design system" $ do
 
 
 --------------------------------------------------------------------------------
---https://design.smart.coop/development/template-examples/app-datagrid.html
+-- https://design.smart.coop/development/template-examples/app-datagrid.html
 datagrid :: Html
 datagrid = document "Smart design system" $ do
   mainContent (titlebar "Module title") table
 
 
 --------------------------------------------------------------------------------
---https://design.smart.coop/development/template-examples/register-form.html
+-- https://design.smart.coop/development/template-examples/register-form.html
 registration :: Html
 registration = do
   let title = "Smart design system"
@@ -188,7 +196,7 @@ registration = do
               $ H.a
               ! A.href "/"
               $ H.img
-              ! A.src "https://design.smart.coop/images/logo.svg"
+              ! A.src "/static/images/logo.svg"
               ! A.alt "Smart"
             H.div ! A.class_ "c-hr" $ ""
             H.h1 ! A.class_ "c-h2" $ "Register your account"
@@ -405,25 +413,6 @@ inputRadios name label labels = H.div ! A.class_ "o-form-group" $ do
 
 
 --------------------------------------------------------------------------------
-mainContent top content =
-  H.main ! A.class_ "u-scroll-wrapper u-maximize-width" $ do
-    top
-    H.div ! A.class_ "u-scroll-wrapper-body" $ content
-
-mainContentSideMenu menu top content =
-  H.main ! A.class_ "u-scroll-wrapper u-maximize-width" $ do
-    H.div ! A.class_ "c-app-layout-inner" $ do
-      H.div ! A.class_ "c-app-layout-inner__sidebar u-bg-gray-50" $ menu
-      H.div
-        ! A.class_ "c-app-layout-inner__main"
-        $ H.div
-        ! A.class_ "u-scroll-wrapper"
-        $ do
-            top
-            H.div ! A.class_ "u-scroll-wrapper-body" $ content
-
-
---------------------------------------------------------------------------------
 toolbar =
   H.div
     ! A.class_ "c-navbar c-navbar--bordered-bottom"
@@ -519,37 +508,14 @@ titlebar title =
 
 
 --------------------------------------------------------------------------------
-menu = H.ul ! A.class_ "c-side-menu" $ do
-  H.li
-    ! A.class_ "c-side-menu__item c-side-menu__item--active"
-    $ H.a
-    ! A.class_ "c-side-menu__link"
-    ! A.href "#"
-    $ do
-        H.div
-          ! A.class_ "o-svg-icon o-svg-icon-document  "
-          $ H.toMarkup
-          $ svgIconDocument
-        H.div ! A.class_ "c-sidebar-item__label" $ "Quotes & invoices"
-  H.li
-    ! A.class_ "c-side-menu__item"
-    $ H.a
-    ! A.class_ "c-side-menu__link"
-    ! A.href "#"
-    $ do
-        H.div
-          ! A.class_ "o-svg-icon o-svg-icon-bills  "
-          $ H.toMarkup
-          $ svgIconBills
-        H.div ! A.class_ "c-sidebar-item__label" $ "Funding"
-  H.li
-    ! A.class_ "c-side-menu__item"
-    $ H.a
-    ! A.class_ "c-side-menu__link"
-    ! A.href "#"
-    $ do
-        H.div ! A.class_ "o-svg-icon o-svg-icon-tag  " $ H.toMarkup $ svgIconTag
-        H.div ! A.class_ "c-sidebar-item__label" $ "Expenses"
+menu :: SideMenu
+menu =
+  SideMenuWithActive
+    []
+    ( SideMenuItem "Quotes & invoices" "#" )
+    [ SideMenuItem "Funding" "#"
+    , SideMenuItem "Expenses" "#"
+    ]
 
 
 --------------------------------------------------------------------------------
@@ -800,15 +766,15 @@ myHead title = H.head $ do
   H.title title
   H.meta ! A.name "viewport" ! A.content "width=device-width, initial-scale=1"
   H.meta ! A.name "robots" ! A.content "noindex"
-  H.link ! A.rel "stylesheet" ! A.href "https://design.smart.coop/css/main.css"
+  H.link ! A.rel "stylesheet" ! A.href "/static/css/main.css"
 
 myBody body = H.body ! A.class_ "u-maximize-height u-overflow-hidden" $ do
   H.div ! A.class_ "c-app-layout" $ body
   js
 
 js = do
-  H.script ! A.src "https://design.smart.coop/js/bundle-prototype.js" $ ""
-  H.script ! A.src "https://design.smart.coop/js/bundle-client.js" $ ""
+  H.script ! A.src "/static/js/bundle-prototype.js" $ ""
+  H.script ! A.src "/static/js/bundle-client.js" $ ""
 
 
 
@@ -1362,17 +1328,16 @@ inputDialog name label = H.div ! A.class_ "o-form-group" $ do
 
 --------------------------------------------------------------------------------
 webEmpty :: Html
-webEmpty = webDocument "Smart design system" $ return ()
+webEmpty = webBody $ return ()
 
 
 --------------------------------------------------------------------------------
 -- https://design.smart.coop/blog/2021/10/08/smart-announces-an-open-design-system.html
 webPage :: Html
-webPage = webDocument "Smart design system" $ article
-  "Smart announces an open design system"
-  (Just "October 8, 2021")
-  post
-  avatars
+webPage = webBody $ article "Smart announces an open design system"
+                            (Just "October 8, 2021")
+                            post
+                            avatars
 
 post = do
   H.p $ do
@@ -1429,12 +1394,6 @@ avatars =
 
 
 --------------------------------------------------------------------------------
-webDocument title body = do
-  H.docType
-  H.html ! A.class_ "u-maximize-height" ! A.dir "ltr" ! A.lang "en" $ do
-    myHead title
-    webBody body
-
 article title mdate content authors =
   H.article ! A.class_ "c-blog-article" $ do
     H.div ! A.class_ "c-blog-article__header" $ do
@@ -1446,7 +1405,7 @@ article title mdate content authors =
 
 
 --------------------------------------------------------------------------------
-webBody body = H.body ! A.class_ "u-maximize-height" $ do
+webBody body = do
   myHeader
   H.main
     ! A.class_ "o-container"
@@ -1477,7 +1436,7 @@ myHeader =
           $ H.a
           ! A.href "/"
           $ H.img
-          ! A.src "https://design.smart.coop/images/logo.svg"
+          ! A.src "/static/images/logo.svg"
           ! A.alt "Smart"
         H.div
           ! A.class_ "c-toolbar__right"
@@ -1486,49 +1445,12 @@ myHeader =
           $ H.nav
           ! A.class_ "c-design-system-nav"
           $ do
-              H.button
-                ! A.class_
-                    "c-button c-button--borderless c-button--icon c-design-system-nav-open"
-                ! A.type_ "button"
-                ! A.id "c-design-system-nav-open"
-                $ H.span
-                ! A.class_ "c-button__content"
-                $ do
-                    H.div
-                      ! A.class_ "o-svg-icon o-svg-icon-menu  "
-                      $ H.toMarkup svgIconMenu
-                    H.div ! A.class_ "u-sr-accessible" $ "Open menu"
-              H.button
-                ! A.class_
-                    "c-button c-button--borderless c-button--icon c-design-system-nav-close"
-                ! A.type_ "button"
-                ! A.id "c-design-system-nav-close"
-                $ H.span
-                ! A.class_ "c-button__content"
-                $ do
-                    H.div
-                      ! A.class_ "o-svg-icon o-svg-icon-close  "
-                      $ H.toMarkup svgIconClose
-                    H.div ! A.class_ "u-sr-accessible" $ "Close menu"
-              H.div ! A.class_ "c-design-system-nav__mobile" $ H.ul $ do
-                H.li $ do
-                  H.a ! A.href "/components/" $ "Components"
-                H.li $ H.a ! A.href "/pages/" $ "Pages"
-              H.div
-                ! A.class_ "c-design-system-nav__desktop"
-                $ H.ul
-                ! A.class_ "c-pill-navigation"
-                $ do
-                    H.li
-                      ! A.class_ "c-pill-navigation__item"
-                      $ H.a
-                      ! A.href "/components/"
-                      $ "Components"
-                    H.li
-                      ! A.class_ "c-pill-navigation__item"
-                      $ H.a
-                      ! A.href "/pages/"
-                      $ "Pages"
+              hamburgerMenu
+              toNavbarMobile entries
+              toNavbarDesktop entries
+
+entries =
+  [Entry "Components" (Link "/components/"), Entry "Pages" (Link "/pages/")]
 
 myFooter =
   H.footer
