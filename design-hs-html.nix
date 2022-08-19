@@ -25,6 +25,18 @@ in
       mkdir -p $out/${outputDir} # create the output directory.
       # The haskell side ensures all subdirectories are created on the fly.
       ${exe}/bin/design-hs-exe --output-dir $out/${outputDir}
+      cp -r static $out/html/
+    '';
+  };
+
+  static = pkgs.stdenv.mkDerivation {
+    inherit system;
+
+    name = "static";
+    src = ./static;
+    installPhase = ''
+      mkdir -p $out/
+      cp -r . $out/
     '';
   };
 }
