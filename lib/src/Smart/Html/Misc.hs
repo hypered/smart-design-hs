@@ -96,7 +96,7 @@ landingFooter githubLink =
         H.hr ! A.class_ "c-hr"
         H.ul
           ! A.class_
-              "c-bordered-list-horizontal c-bordered-list-horizontal--muted"
+              "c-bordered-list-horizontal"
           $ H.li
           $ H.a
           ! A.href githubLink
@@ -1463,7 +1463,7 @@ myFooter =
         H.hr ! A.class_ "c-hr"
         H.ul
           ! A.class_
-              "c-bordered-list-horizontal c-bordered-list-horizontal--muted"
+              "c-bordered-list-horizontal"
           $ H.li
           $ H.a
           ! A.href "https://github.com/smartcoop/design"
