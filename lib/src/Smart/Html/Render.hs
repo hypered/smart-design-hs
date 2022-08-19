@@ -72,5 +72,4 @@ smartDesignHead =
 
 -- | Markup for the Smart JS scripts.
 js = do
-  H.script ! A.src "/static/js/bundle-prototype.js" $ mempty
   H.script ! A.src "/static/js/bundle-client.js" $ mempty

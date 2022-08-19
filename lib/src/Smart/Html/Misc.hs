@@ -773,7 +773,6 @@ myBody body = H.body ! A.class_ "u-maximize-height u-overflow-hidden" $ do
   js
 
 js = do
-  H.script ! A.src "/static/js/bundle-prototype.js" $ ""
   H.script ! A.src "/static/js/bundle-client.js" $ ""
 
 
