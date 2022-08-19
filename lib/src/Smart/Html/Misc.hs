@@ -73,7 +73,7 @@ landingPanel title content =
     $ H.div
     ! A.class_ "c-display"
     $ do
-        H.h3 title
+        H.h2 title
         content
 
 landingImage =
