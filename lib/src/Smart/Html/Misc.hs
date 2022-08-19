@@ -82,7 +82,7 @@ landingImage =
     $ H.div
     ! A.class_ "c-design-system-home-illustration"
     $ H.img
-    ! A.src "https://design.smart.coop/images/illustration-form.png"
+    ! A.src "/static/images/illustration-form.png"
     ! A.alt ""
 
 landingFooter githubLink =
@@ -167,14 +167,14 @@ pageWithDialog = document "Smart design system" $ do
 
 
 --------------------------------------------------------------------------------
---https://design.smart.coop/development/template-examples/app-datagrid.html
+-- https://design.smart.coop/development/template-examples/app-datagrid.html
 datagrid :: Html
 datagrid = document "Smart design system" $ do
   mainContent (titlebar "Module title") table
 
 
 --------------------------------------------------------------------------------
---https://design.smart.coop/development/template-examples/register-form.html
+-- https://design.smart.coop/development/template-examples/register-form.html
 registration :: Html
 registration = do
   let title = "Smart design system"
@@ -196,7 +196,7 @@ registration = do
               $ H.a
               ! A.href "/"
               $ H.img
-              ! A.src "https://design.smart.coop/images/logo.svg"
+              ! A.src "/static/images/logo.svg"
               ! A.alt "Smart"
             H.div ! A.class_ "c-hr" $ ""
             H.h1 ! A.class_ "c-h2" $ "Register your account"
@@ -766,15 +766,15 @@ myHead title = H.head $ do
   H.title title
   H.meta ! A.name "viewport" ! A.content "width=device-width, initial-scale=1"
   H.meta ! A.name "robots" ! A.content "noindex"
-  H.link ! A.rel "stylesheet" ! A.href "https://design.smart.coop/css/main.css"
+  H.link ! A.rel "stylesheet" ! A.href "/static/css/main.css"
 
 myBody body = H.body ! A.class_ "u-maximize-height u-overflow-hidden" $ do
   H.div ! A.class_ "c-app-layout" $ body
   js
 
 js = do
-  H.script ! A.src "https://design.smart.coop/js/bundle-prototype.js" $ ""
-  H.script ! A.src "https://design.smart.coop/js/bundle-client.js" $ ""
+  H.script ! A.src "/static/js/bundle-prototype.js" $ ""
+  H.script ! A.src "/static/js/bundle-client.js" $ ""
 
 
 
@@ -1436,7 +1436,7 @@ myHeader =
           $ H.a
           ! A.href "/"
           $ H.img
-          ! A.src "https://design.smart.coop/images/logo.svg"
+          ! A.src "/static/images/logo.svg"
           ! A.alt "Smart"
         H.div
           ! A.class_ "c-toolbar__right"

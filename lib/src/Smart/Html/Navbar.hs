@@ -173,7 +173,7 @@ navbar tree items =
     ! A.class_ "c-navbar c-navbar--bordered-bottom c-navbar--fixed"
     $ toolbar
         [ H.toMarkup
-          $ BrandXSmall "/" "https://design.smart.coop/images/logo.svg" "Smart"
+          $ BrandXSmall "/" "/static/images/logo.svg" "Smart"
         , H.nav $ H.ul ! A.class_ "c-pill-navigation" $ toNavbar tree
         ]
         (map toplevel' items)
@@ -192,7 +192,7 @@ navbarWebsite' content =
     ! A.class_ "c-navbar c-navbar--bordered-bottom c-navbar--main"
     $ toolbar
         [ H.toMarkup
-            $ BrandSmall "/" "https://design.smart.coop/images/logo.svg" "Smart"
+            $ BrandSmall "/" "/static/images/logo.svg" "Smart"
         ]
         [content]
 

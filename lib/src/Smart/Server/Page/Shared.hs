@@ -72,7 +72,4 @@ withPageHeading html =
   protocss = stylesheet "prototype.css"
   custscss = stylesheet "styleguide-customizations.css"
   stylesheet file = H.link ! A.rel "stylesheet" ! A.href
-    ("https://design.smart.coop/css/" <> file)
-
-
-
+    ("/static/css/" <> file)

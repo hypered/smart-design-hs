@@ -53,9 +53,9 @@ smartDesignHead =
   protocss = stylesheet "prototype.css"
   custscss = stylesheet "styleguide-customizations.css"
   stylesheet file = H.link ! A.rel "stylesheet" ! A.href
-    ("https://design.smart.coop/css/" <> file)
+    ("/static/css/" <> file)
 
 -- | Markup for the Smart JS scripts.
 js = do
-  H.script ! A.src "https://design.smart.coop/js/bundle-prototype.js" $ mempty
-  H.script ! A.src "https://design.smart.coop/js/bundle-client.js" $ mempty
+  H.script ! A.src "/static/js/bundle-prototype.js" $ mempty
+  H.script ! A.src "/static/js/bundle-client.js" $ mempty

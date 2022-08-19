@@ -74,7 +74,7 @@ helpEntries =
 
 userEntry = UserEntry
   userEntries
-  (AvatarImage "https://design.smart.coop/images/avatars/1.jpg")
+  (AvatarImage "/static/images/avatars/1.jpg")
 
 userEntries =
   [SubEntry "My profile" "#" False, Divider, SubEntry "Sign out" "#" False]
