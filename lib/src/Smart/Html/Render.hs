@@ -44,11 +44,12 @@ renderCanvasWithHead canvas = smartDesignHead >> body
 -- | Markup for the Smart CSS head etc.
 smartDesignHead :: H.Html
 smartDesignHead =
-  H.head $ charset >> viewport >> maincss >> protocss >> custscss
+  H.head $ charset >> viewport >> title >> maincss >> protocss >> custscss
  where
   charset = H.meta ! A.charset "utf-8"
   viewport =
     H.meta ! A.name "viewport" ! A.content "width=device-width, initial-scale=1"
+  title    = H.title "Smart prototype" -- TODO Make it a parameter.
   maincss  = stylesheet "main.css"
   protocss = stylesheet "prototype.css"
   custscss = stylesheet "styleguide-customizations.css"
