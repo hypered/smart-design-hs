@@ -419,9 +419,9 @@ mainContent top content =
 mainContentSideMenu menu top content =
   H.main ! A.class_ "u-scroll-wrapper u-maximize-width" $ do
     H.div ! A.class_ "c-app-layout-inner" $ do
-      H.div ! A.class_ "c-app-layout-inner__sidebar u-bg-gray-50" $ menu
+      H.div ! A.class_ "c-app-layout-inner__sidebar" $ menu
       H.div
-        ! A.class_ "c-app-layout-inner__main"
+        ! A.class_ "c-app-layout-inner__content"
         $ H.div
         ! A.class_ "u-scroll-wrapper"
         $ do
