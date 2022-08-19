@@ -37,23 +37,38 @@ renderCanvasFullScroll canvas = do
   H.docType
   H.html ! A.class_ "u-maximize-height" ! A.dir "ltr" ! A.lang "en" $ do
     smartDesignHead
-    H.body ! A.class_ "u-maximize-height u-overflow-hidden" $ H.toMarkup canvas >> js
+    H.body
+      !  A.class_ "u-maximize-height u-overflow-hidden"
+      $  H.toMarkup canvas
+      >> js
 
 
 -- | Markup for the Smart CSS head etc.
 smartDesignHead :: H.Html
 smartDesignHead =
-  H.head $ charset >> viewport >> title >> maincss >> protocss >> custscss
+  H.head
+    $  charset
+    >> viewport
+    >> title
+    >> description
+    >> maincss
+    >> protocss
+    >> custscss
  where
   charset = H.meta ! A.charset "utf-8"
   viewport =
     H.meta ! A.name "viewport" ! A.content "width=device-width, initial-scale=1"
-  title    = H.title "Smart prototype" -- TODO Make it a parameter.
+  title = H.title "Smart prototype" -- TODO Make it a parameter.
+  description =                     -- TODO Make it a parameter.
+    H.meta
+      ! A.name "description"
+      ! A.content
+          "Curiosity is an ever-evolving prototype system to think, discuss, and communicate the future of Smart Belgium’s developments."
   maincss  = stylesheet "main.css"
   protocss = stylesheet "prototype.css"
   custscss = stylesheet "styleguide-customizations.css"
-  stylesheet file = H.link ! A.rel "stylesheet" ! A.href
-    ("/static/css/" <> file)
+  stylesheet file =
+    H.link ! A.rel "stylesheet" ! A.href ("/static/css/" <> file)
 
 -- | Markup for the Smart JS scripts.
 js = do
