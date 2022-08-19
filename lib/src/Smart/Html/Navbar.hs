@@ -9,6 +9,7 @@ module Smart.Html.Navbar
   , mkNavbarWebsite
   , toNavbar
   , toNavbarDesktop
+  , toNavbarMobile
   , navbar
   , navbarWebsite
   , navbarWebsite'
@@ -67,6 +68,23 @@ toNavbarDesktop tree =
     $ H.ul
     ! A.class_ "c-pill-navigation"
     $ toNavbar tree
+
+toNavbarMobile tree =
+  H.div ! A.class_ "c-design-system-nav__mobile" $ H.ul $ mapM_
+    toplevelMobile
+    (zip tree [1 ..])
+
+toplevelMobile (Entry a (Link lnk), _) =
+  H.li $ H.a ! A.href (H.toValue lnk) $ H.toHtml a
+toplevelMobile (Entry a (SubEntries bs), n) = H.li $ do
+  H.span $ H.toHtml a
+  H.ul $ do
+    mapM_ sublevelMobile bs
+
+sublevelMobile (SubEntry b lnk _) =
+  H.li $ H.a ! A.href (H.toValue lnk) $ H.toHtml b
+sublevelMobile Divider        = mempty
+sublevelMobile (SignedInAs _) = mempty -- TODO
 
 toNavbar tree = mapM_ toplevel (zip tree [1 ..])
 

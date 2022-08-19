@@ -14,6 +14,7 @@ import           Smart.Html.Navbar              ( Action(..)
                                                 , SubEntry(..)
                                                 , navbarWebsite'
                                                 , toNavbarDesktop
+                                                , toNavbarMobile
                                                 )
 import           Smart.Html.Shared.Html.Icons
 import           Text.Blaze                     ( customAttribute )
@@ -61,46 +62,7 @@ navigation' = navbarWebsite' $ H.nav ! A.class_ "c-design-system-nav" $ do
     $ do
         H.div ! A.class_ "o-svg-icon o-svg-icon-close" $ H.toMarkup svgIconClose
         H.div ! A.class_ "u-sr-accessible" $ "Close menu"
-  H.div ! A.class_ "c-design-system-nav__mobile" $ H.ul $ do
-    H.li $ do
-      H.span "Design"
-      H.ul $ do
-        H.li $ H.a ! A.href "/design/how-it-works.html" $ "Design workflow"
-        H.li
-          $ H.a
-          ! A.href "/design/in-practice/copywriting.html"
-          $ "Design system in practice"
-    H.li $ do
-      H.span "Development"
-      H.ul $ do
-        H.li
-          $ H.a
-          ! A.href "/development/getting-started.html"
-          $ "Getting started"
-        H.li $ H.a ! A.href "/development/example-pages.html" $ "Example pages"
-        H.li $ H.a ! A.href "/prototypes/index.html" $ "Prototypes"
-        H.li
-          $ H.a
-          ! A.href "/development/package-and-repo-links.html"
-          $ "Package and repo links"
-        H.li
-          $ H.a
-          ! A.href "/development/browser-support.html"
-          $ "Browser support"
-        H.li
-          $ H.a
-          ! A.href "/development/writing-css/architecture.html"
-          $ "CSS architecture"
-        H.li
-          $ H.a
-          ! A.href "/development/writing-css/component-structure.html"
-          $ "CSS component structure"
-    H.li
-      $ H.a
-      ! A.href "/development/component-documentation.html"
-      $ "Components"
-    H.li $ H.a ! A.href "/blog/index.html" $ "Blog"
-    H.li $ H.a ! A.href "/changelog.html" $ "Changelog"
+  toNavbarMobile entries
   toNavbarDesktop entries
 
 entries =
