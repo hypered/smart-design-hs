@@ -7,7 +7,6 @@ module Smart.Html.Render
   ( renderCanvas
   , renderCanvasText
   , renderCanvasWithHead
-  , renderCanvasWithHeadText
   , smartDesignHead
   ) where
 
@@ -31,10 +30,6 @@ renderCanvas canvas = do
     ! A.class_ "u-maximize-height"
     ! A.dir "ltr"
     ! A.lang "en" $ renderCanvasWithHead canvas
-
--- | Render a Smart canvas ensuring the CSS etc. are properly imported, as Text.
-renderCanvasWithHeadText :: Dsl.HtmlCanvas -> T.Text
-renderCanvasWithHeadText = T.pack . R.renderHtml . renderCanvasWithHead
 
 -- | Render a Smart canvas ensuring the CSS etc. are properly imported.
 renderCanvasWithHead :: Dsl.HtmlCanvas -> H.Html
