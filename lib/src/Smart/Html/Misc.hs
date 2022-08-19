@@ -1362,13 +1362,13 @@ inputDialog name label = H.div ! A.class_ "o-form-group" $ do
 
 --------------------------------------------------------------------------------
 webEmpty :: Html
-webEmpty = webDocument "Smart design system" $ return ()
+webEmpty = webBody $ return ()
 
 
 --------------------------------------------------------------------------------
 -- https://design.smart.coop/blog/2021/10/08/smart-announces-an-open-design-system.html
 webPage :: Html
-webPage = webDocument "Smart design system" $ article
+webPage = webBody $ article
   "Smart announces an open design system"
   (Just "October 8, 2021")
   post
@@ -1429,12 +1429,6 @@ avatars =
 
 
 --------------------------------------------------------------------------------
-webDocument title body = do
-  H.docType
-  H.html ! A.class_ "u-maximize-height" ! A.dir "ltr" ! A.lang "en" $ do
-    myHead title
-    webBody body
-
 article title mdate content authors =
   H.article ! A.class_ "c-blog-article" $ do
     H.div ! A.class_ "c-blog-article__header" $ do
@@ -1446,7 +1440,7 @@ article title mdate content authors =
 
 
 --------------------------------------------------------------------------------
-webBody body = H.body ! A.class_ "u-maximize-height" $ do
+webBody body = do
   myHeader
   H.main
     ! A.class_ "o-container"
