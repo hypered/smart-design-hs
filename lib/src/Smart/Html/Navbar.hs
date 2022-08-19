@@ -10,6 +10,7 @@ module Smart.Html.Navbar
   , toNavbar
   , navbar
   , navbarWebsite
+  , navbarWebsite'
   ) where
 
 import           Smart.Html.Avatar
@@ -112,9 +113,7 @@ toplevel' e = case e of
       ! A.href "#"
       ! customAttribute "data-menu" "userMenu"
       $ H.toMarkup
-      $ Avatar avatarImage
-               Regular
-               AvNoAdditionalContent
+      $ Avatar avatarImage Regular AvNoAdditionalContent
     H.ul ! A.class_ "c-menu c-menu--large" ! A.id "userMenu" $ mapM_ sublevel bs
 
 sublevel :: SubEntry -> Html
@@ -135,13 +134,11 @@ sublevel Divider =
   H.li ! A.class_ "c-menu__divider" ! A.role "presentational" $ ""
 
 sublevel (SignedInAs name) =
-  H.li ! A.class_ "c-menu__info" $
-    H.div ! A.class_ "c-avatar-and-text" $ do
-      H.div ! A.class_ "c-avatar c-avatar--img" $
-        H.toMarkup svgIconUser
-      H.div ! A.class_ "c-avatar-and-text__text" $ do
-        H.p "Signed in as"
-        H.strong $ H.toHtml name
+  H.li ! A.class_ "c-menu__info" $ H.div ! A.class_ "c-avatar-and-text" $ do
+    H.div ! A.class_ "c-avatar c-avatar--img" $ H.toMarkup svgIconUser
+    H.div ! A.class_ "c-avatar-and-text__text" $ do
+      H.p "Signed in as"
+      H.strong $ H.toHtml name
 
 navbar tree items =
   H.header
@@ -155,6 +152,9 @@ navbar tree items =
         (map toplevel' items)
 
 navbarWebsite tree =
+  navbarWebsite' $ H.nav $ H.ul ! A.class_ "c-pill-navigation" $ toNavbar tree
+
+navbarWebsite' content =
   H.header
     $ H.div
     ! A.class_ "o-container"
@@ -164,7 +164,7 @@ navbarWebsite tree =
         [ H.toMarkup
             $ BrandSmall "/" "https://design.smart.coop/images/logo.svg" "Smart"
         ]
-        [H.nav $ H.ul ! A.class_ "c-pill-navigation" $ toNavbar tree]
+        [content]
 
 toolbar leftItems rightItems = H.div ! A.class_ "c-toolbar" $ do
   H.div ! A.class_ "c-toolbar__left" $ mapM_ item leftItems
