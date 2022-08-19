@@ -7,6 +7,7 @@ module Smart.Html.Navbar
   , SubEntry(..)
   , mkNavbar
   , mkNavbarWebsite
+  , hamburgerMenu
   , toNavbar
   , toNavbarDesktop
   , toNavbarMobile
@@ -178,7 +179,10 @@ navbar tree items =
         (map toplevel' items)
 
 navbarWebsite tree =
-  navbarWebsite' $ H.nav $ H.ul ! A.class_ "c-pill-navigation" $ toNavbar tree
+  navbarWebsite' $ H.nav ! A.class_ "c-design-system-nav" $ do
+    hamburgerMenu
+    toNavbarMobile tree
+    toNavbarDesktop tree
 
 navbarWebsite' content =
   H.header
@@ -196,3 +200,25 @@ toolbar leftItems rightItems = H.div ! A.class_ "c-toolbar" $ do
   H.div ! A.class_ "c-toolbar__left" $ mapM_ item leftItems
   H.div ! A.class_ "c-toolbar__right" $ mapM_ item rightItems
   where item = H.div ! A.class_ "c-toolbar__item"
+
+hamburgerMenu = do
+  H.button
+    ! A.class_
+        "c-button c-button--borderless c-button--icon c-design-system-nav-open"
+    ! A.type_ "button"
+    ! A.id "c-design-system-nav-open"
+    $ H.span
+    ! A.class_ "c-button__content"
+    $ do
+        H.div ! A.class_ "o-svg-icon o-svg-icon-menu" $ H.toMarkup svgIconMenu
+        H.div ! A.class_ "u-sr-accessible" $ "Open menu"
+  H.button
+    ! A.class_
+        "c-button c-button--borderless c-button--icon c-design-system-nav-close"
+    ! A.type_ "button"
+    ! A.id "c-design-system-nav-close"
+    $ H.span
+    ! A.class_ "c-button__content"
+    $ do
+        H.div ! A.class_ "o-svg-icon o-svg-icon-close" $ H.toMarkup svgIconClose
+        H.div ! A.class_ "u-sr-accessible" $ "Close menu"

@@ -26,6 +26,7 @@ module Smart.Html.Misc
 
 import           Smart.Html.Navbar              ( Action(..)
                                                 , Entry(..)
+                                                , hamburgerMenu
                                                 , toNavbarDesktop
                                                 , toNavbarMobile
                                                 )
@@ -1373,11 +1374,10 @@ webEmpty = webBody $ return ()
 --------------------------------------------------------------------------------
 -- https://design.smart.coop/blog/2021/10/08/smart-announces-an-open-design-system.html
 webPage :: Html
-webPage = webBody $ article
-  "Smart announces an open design system"
-  (Just "October 8, 2021")
-  post
-  avatars
+webPage = webBody $ article "Smart announces an open design system"
+                            (Just "October 8, 2021")
+                            post
+                            avatars
 
 post = do
   H.p $ do
@@ -1485,37 +1485,12 @@ myHeader =
           $ H.nav
           ! A.class_ "c-design-system-nav"
           $ do
-              H.button
-                ! A.class_
-                    "c-button c-button--borderless c-button--icon c-design-system-nav-open"
-                ! A.type_ "button"
-                ! A.id "c-design-system-nav-open"
-                $ H.span
-                ! A.class_ "c-button__content"
-                $ do
-                    H.div
-                      ! A.class_ "o-svg-icon o-svg-icon-menu  "
-                      $ H.toMarkup svgIconMenu
-                    H.div ! A.class_ "u-sr-accessible" $ "Open menu"
-              H.button
-                ! A.class_
-                    "c-button c-button--borderless c-button--icon c-design-system-nav-close"
-                ! A.type_ "button"
-                ! A.id "c-design-system-nav-close"
-                $ H.span
-                ! A.class_ "c-button__content"
-                $ do
-                    H.div
-                      ! A.class_ "o-svg-icon o-svg-icon-close  "
-                      $ H.toMarkup svgIconClose
-                    H.div ! A.class_ "u-sr-accessible" $ "Close menu"
+              hamburgerMenu
               toNavbarMobile entries
               toNavbarDesktop entries
 
 entries =
-  [ Entry "Components" (Link "/components/")
-  , Entry "Pages"  (Link "/pages/")
-  ]
+  [Entry "Components" (Link "/components/"), Entry "Pages" (Link "/pages/")]
 
 myFooter =
   H.footer
