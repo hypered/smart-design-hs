@@ -61,13 +61,11 @@ withPageHeading html =
     $  charset
     >> viewport
     >> maincss
-    >> custscss
     >> html
  where
   charset = H.meta ! A.charset "utf-8"
   viewport =
     H.meta ! A.name "viewport" ! A.content "width=device-width, initial-scale=1"
   maincss  = stylesheet "main.css"
-  custscss = stylesheet "styleguide-customizations.css"
   stylesheet file = H.link ! A.rel "stylesheet" ! A.href
     ("/static/css/" <> file)
