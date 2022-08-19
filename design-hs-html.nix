@@ -26,6 +26,7 @@ in
       # The haskell side ensures all subdirectories are created on the fly.
       ${exe}/bin/design-hs-exe --output-dir $out/${outputDir}
       cp -r static $out/html/
+      cp static/favicon.ico $out/html/
     '';
   };
 
