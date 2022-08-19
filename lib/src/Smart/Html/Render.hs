@@ -5,6 +5,7 @@ Description: Functions to render a Canvas to Html or Text.
 -}
 module Smart.Html.Render
   ( renderCanvas
+  , renderCanvasFullScroll
   , renderCanvasText
   , smartDesignHead
   ) where
@@ -28,6 +29,16 @@ renderCanvas canvas = do
   H.html ! A.class_ "u-maximize-height" ! A.dir "ltr" ! A.lang "en" $ do
     smartDesignHead
     H.body ! A.class_ "u-maximize-height" $ H.toMarkup canvas >> js
+
+-- | This must be combined with a "u-scroll-vertical" on the body, and no
+-- "u-scroll-wrapper" on the main.
+renderCanvasFullScroll :: Dsl.HtmlCanvas -> H.Html
+renderCanvasFullScroll canvas = do
+  H.docType
+  H.html ! A.class_ "u-maximize-height" ! A.dir "ltr" ! A.lang "en" $ do
+    smartDesignHead
+    H.body ! A.class_ "u-maximize-height u-overflow-hidden" $ H.toMarkup canvas >> js
+
 
 -- | Markup for the Smart CSS head etc.
 smartDesignHead :: H.Html
