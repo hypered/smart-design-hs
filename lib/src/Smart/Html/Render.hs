@@ -6,7 +6,6 @@ Description: Functions to render a Canvas to Html or Text.
 module Smart.Html.Render
   ( renderCanvas
   , renderCanvasText
-  , renderCanvasWithHead
   , smartDesignHead
   ) where
 
@@ -26,15 +25,9 @@ renderCanvasText = T.pack . R.renderHtml . renderCanvas
 renderCanvas :: Dsl.HtmlCanvas -> H.Html
 renderCanvas canvas = do
   H.docType
-  H.html
-    ! A.class_ "u-maximize-height"
-    ! A.dir "ltr"
-    ! A.lang "en" $ renderCanvasWithHead canvas
-
--- | Render a Smart canvas ensuring the CSS etc. are properly imported.
-renderCanvasWithHead :: Dsl.HtmlCanvas -> H.Html
-renderCanvasWithHead canvas = smartDesignHead >> body
-  where body = H.body (H.toMarkup canvas >> js) ! A.class_ "u-maximize-height"
+  H.html ! A.class_ "u-maximize-height" ! A.dir "ltr" ! A.lang "en" $ do
+    smartDesignHead
+    H.body ! A.class_ "u-maximize-height" $ H.toMarkup canvas >> js
 
 -- | Markup for the Smart CSS head etc.
 smartDesignHead :: H.Html
