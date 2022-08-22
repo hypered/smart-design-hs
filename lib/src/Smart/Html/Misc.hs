@@ -548,8 +548,10 @@ groupHorizontal content =
     $ content
 
 panel :: Text -> Html -> Html
-panel title content = H.div ! A.class_ "u-spacer-bottom-l" $ H.toMarkup $
-  PanelHeaderAndBody (Title title) content
+panel title content =
+  H.div ! A.class_ "u-spacer-bottom-l" $ H.toMarkup $ PanelHeaderAndBody
+    (Title title)
+    content
 
 subform1 = formGroup $ do
   H.div ! A.class_ "o-form-group" $ do
@@ -621,36 +623,45 @@ subform3 = formGroup $ do
 
 --------------------------------------------------------------------------------
 exampleTable = do
-  table titles rows action
+  table titles display rows
   pagination
  where
   titles = ["Data", "Data", "Data"]
-  rows   = replicate 10 ["Data", "Data", "Data"]
-  action = rowAction
-    [(divIconEdit, "Edit", "#"), (divIconDelete, "Delete", "#")]
-    (Just "#")
+  display item =
+    ( item
+    , [(divIconEdit, "Edit", "#"), (divIconDelete, "Delete", "#")]
+    , (Just "#")
+    )
+  rows = replicate 10 ["Data", "Data", "Data"]
 
-table :: [Text] -> [[Text]] -> Html -> Html
-table titles rows action = H.div ! A.class_ "u-padding-horizontal-s" $ do
+table
+  :: [Text] -> (a -> ([Text], [(Html, Text, Text)], Maybe Text)) -> [a] -> Html
+table titles display items = H.div ! A.class_ "u-padding-horizontal-s" $ do
   H.table ! A.class_ "c-table c-table--styled js-data-table" $ do
     H.thead . H.tr . mapM_ (H.th . H.toHtml) $ titles ++ [""]
-    H.tbody
-      $ mapM_ (\row -> H.tr $ mapM_ H.td $ map H.toHtml row ++ [action]) rows
+    H.tbody $ mapM_
+      (\(id, item) ->
+        let (row, actions, mdetail) = display item
+        in  H.tr $ do
+              mapM_ H.td $ map H.toHtml row ++ [rowAction id actions mdetail]
+      )
+      (zip [1 ..] items)
 
-rowAction :: [(Html, Text, Text)] -> Maybe Text -> Html
-rowAction actions mlnk = H.div ! A.class_ "c-button-toolbar" $ do
+rowAction :: Int -> [(Html, Text, Text)] -> Maybe Text -> Html
+rowAction id actions mlnk = H.div ! A.class_ "c-button-toolbar" $ do
+  let id' = H.toValue $ "action-dropdown-" <> (show id :: Text)
   when (not $ null actions) $ do
     H.button
       ! A.class_ "c-button c-button--borderless c-button--icon"
       ! A.type_ "button"
       ! customAttribute "data-menu-placement" "bottom-end"
-      ! customAttribute "data-menu"           "dropdownMenu-0"
+      ! customAttribute "data-menu"           id'
       $ H.span
       ! A.class_ "c-button__content"
       $ do
           divIconOptionsHorizontal
           divAccessible "More options"
-    H.ul ! A.class_ "c-menu" ! A.id "dropdownMenu-0" $ do
+    H.ul ! A.class_ "c-menu" ! A.id id' $ do
       mapM_ actionDropdownLink actions
   maybe (pure ()) rowDetailLink mlnk
 
