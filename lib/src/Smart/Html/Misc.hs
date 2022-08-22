@@ -18,10 +18,15 @@ module Smart.Html.Misc
   , pageWithDialog
   , datagrid
   , registration
+  , table
+  , rowAction
   , toolsNewContract
   , webEmpty
   , webPage
   , js
+  , divIconCheck
+  , divIconDelete
+  , divIconEdit
   ) where
 
 import           Smart.Html.Layout
@@ -31,8 +36,10 @@ import           Smart.Html.Navbar              ( Action(..)
                                                 , toNavbarDesktop
                                                 , toNavbarMobile
                                                 )
-import           Smart.Html.SideMenu            ( SideMenu(..), SideMenuItem(..) )
 import           Smart.Html.Shared.Html.Icons
+import           Smart.Html.SideMenu            ( SideMenu(..)
+                                                , SideMenuItem(..)
+                                                )
 import           Text.Blaze                     ( customAttribute )
 import qualified Text.Blaze.Html5              as H
 import           Text.Blaze.Html5               ( (!)
@@ -95,8 +102,7 @@ landingFooter githubLink =
     $ do
         H.hr ! A.class_ "c-hr"
         H.ul
-          ! A.class_
-              "c-bordered-list-horizontal"
+          ! A.class_ "c-bordered-list-horizontal"
           $ H.li
           $ H.a
           ! A.href githubLink
@@ -170,7 +176,7 @@ pageWithDialog = document "Smart design system" $ do
 -- https://design.smart.coop/development/template-examples/app-datagrid.html
 datagrid :: Html
 datagrid = document "Smart design system" $ do
-  mainContent (titlebar "Module title") table
+  mainContent (titlebar "Module title") exampleTable
 
 
 --------------------------------------------------------------------------------
@@ -509,13 +515,10 @@ titlebar title =
 
 --------------------------------------------------------------------------------
 menu :: SideMenu
-menu =
-  SideMenuWithActive
-    []
-    ( SideMenuItem "Quotes & invoices" "#" )
-    [ SideMenuItem "Funding" "#"
-    , SideMenuItem "Expenses" "#"
-    ]
+menu = SideMenuWithActive
+  []
+  (SideMenuItem "Quotes & invoices" "#")
+  [SideMenuItem "Funding" "#", SideMenuItem "Expenses" "#"]
 
 
 --------------------------------------------------------------------------------
@@ -621,60 +624,84 @@ subform3 = formGroup $ do
 
 
 --------------------------------------------------------------------------------
-table = H.div ! A.class_ "u-padding-horizontal-s" $ do
-  H.table ! A.class_ "c-table c-table--styled js-data-table" $ do
-    H.thead $ H.tr $ do
-      H.th "Data"
-      H.th "Data"
-      H.th "Data"
-      H.th ""
-    H.tbody $ forM_ [1 .. 10] $ \_ -> H.tr $ do
-      H.td "Data"
-      H.td "Data"
-      H.td "Data"
-      H.td $ rowAction
+exampleTable = do
+  table titles rows action
   pagination
+ where
+  titles = ["Data", "Data", "Data"]
+  rows   = replicate 10 ["Data", "Data", "Data"]
+  action = rowAction
+    [(divIconEdit, "Edit", "#"), (divIconDelete, "Delete", "#")]
+    (Just "#")
 
-rowAction = H.div ! A.class_ "c-button-toolbar" $ do
-  H.button
-    ! A.class_ "c-button c-button--borderless c-button--icon"
-    ! A.type_ "button"
-    ! customAttribute "data-menu-placement" "bottom-end"
-    ! customAttribute "data-menu"           "dropdownMenu-0"
-    $ H.span
-    ! A.class_ "c-button__content"
+table :: [Text] -> [[Text]] -> Html -> Html
+table titles rows action = H.div ! A.class_ "u-padding-horizontal-s" $ do
+  H.table ! A.class_ "c-table c-table--styled js-data-table" $ do
+    H.thead . H.tr . mapM_ (H.th . H.toHtml) $ titles ++ [""]
+    H.tbody
+      $ mapM_ (\row -> H.tr $ mapM_ H.td $ map H.toHtml row ++ [action]) rows
+
+rowAction :: [(Html, Text, Text)] -> Maybe Text -> Html
+rowAction actions mlnk = H.div ! A.class_ "c-button-toolbar" $ do
+  when (not $ null actions) $ do
+    H.button
+      ! A.class_ "c-button c-button--borderless c-button--icon"
+      ! A.type_ "button"
+      ! customAttribute "data-menu-placement" "bottom-end"
+      ! customAttribute "data-menu"           "dropdownMenu-0"
+      $ H.span
+      ! A.class_ "c-button__content"
+      $ do
+          divIconOptionsHorizontal
+          divAccessible "More options"
+    H.ul ! A.class_ "c-menu" ! A.id "dropdownMenu-0" $ do
+      mapM_ actionDropdownLink actions
+  maybe (pure ()) rowDetailLink mlnk
+
+actionDropdownLink :: (Html, Text, Text) -> Html
+actionDropdownLink (icon, label, lnk) =
+  H.li
+    ! A.class_ "c-menu__item"
+    $ H.a
+    ! A.class_ "c-menu__label"
+    ! A.href (H.toValue lnk)
     $ do
-        H.div
-          ! A.class_ "o-svg-icon o-svg-icon-options-horizontal"
-          $ H.toMarkup
-          $ svgIconOptionsHorizontal
-        H.div ! A.class_ "u-sr-accessible" $ "More options"
-  H.ul ! A.class_ "c-menu" ! A.id "dropdownMenu-0" $ do
-    H.li
-      ! A.class_ "c-menu__item"
-      $ H.a
-      ! A.class_ "c-menu__label"
-      ! A.href "#"
-      $ do
-          H.div
-            ! A.class_ "o-svg-icon o-svg-icon-edit"
-            $ H.toMarkup
-            $ svgIconEdit
-          H.span $ "Edit"
-    H.li
-      ! A.class_ "c-menu__item"
-      $ H.a
-      ! A.class_ "c-menu__label"
-      ! A.href "#"
-      $ do
-          H.div
-            ! A.class_ "o-svg-icon o-svg-icon-delete"
-            $ H.toMarkup
-            $ svgIconDelete
-          H.span "Delete"
-  H.button
+        icon
+        H.span $ H.toHtml label
+
+divIconOptionsHorizontal =
+  H.div
+    ! A.class_ "o-svg-icon o-svg-icon-options-horizontal"
+    $ H.toMarkup
+    $ svgIconOptionsHorizontal
+
+-- TODO I think there are double dashes: e.g. o-svg-icon--check
+divIconCheck =
+  H.div ! A.class_ "o-svg-icon o-svg-icon-check" $ H.toMarkup $ svgIconCheck
+
+divIconDelete =
+  H.div ! A.class_ "o-svg-icon o-svg-icon-delete" $ H.toMarkup $ svgIconDelete
+
+divIconEdit =
+  H.div ! A.class_ "o-svg-icon o-svg-icon-edit" $ H.toMarkup $ svgIconEdit
+
+divAccessible :: Text -> Html
+divAccessible = (H.div ! A.class_ "u-sr-accessible") . H.toHtml
+
+rowDetailButton :: Html
+rowDetailButton = rowDetail H.button Nothing
+
+-- It seems that both H.a and H.button render correctly
+rowDetailLink :: Text -> Html
+rowDetailLink lnk = rowDetail H.a $ Just lnk
+
+rowDetail :: (Html -> Html) -> Maybe Text -> Html
+rowDetail element mlnk =
+  ( maybe identity addHref mlnk
+    $ element
     ! A.class_ "c-button c-button--borderless c-button--icon"
     ! A.type_ "button"
+    )
     $ H.span
     ! A.class_ "c-button__content"
     $ do
@@ -683,8 +710,9 @@ rowAction = H.div ! A.class_ "c-button-toolbar" $ do
           $ H.toMarkup
           $ svgIconChevronRight
         H.div ! A.class_ "u-sr-accessible" $ "Go to detail"
+  where addHref lnk = (! A.href (H.toValue lnk))
 
-pagination =
+pagination = H.div ! A.class_ "u-padding-horizontal-s" $ do
   H.div
     ! A.class_ "u-padding-horizontal"
     $ H.div
@@ -1461,8 +1489,7 @@ myFooter =
     $ do
         H.hr ! A.class_ "c-hr"
         H.ul
-          ! A.class_
-              "c-bordered-list-horizontal"
+          ! A.class_ "c-bordered-list-horizontal"
           $ H.li
           $ H.a
           ! A.href "https://github.com/smartcoop/design"
