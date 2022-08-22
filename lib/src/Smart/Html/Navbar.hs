@@ -57,7 +57,7 @@ data Action = Link Link | SubEntries [SubEntry]
 -- separate one.
 -- UserEntry can use a button, but the rendering is not correctly aligned,
 -- maybe this could be fixed in CSS.
-data RightEntry = HelpEntry [SubEntry] | SearchEntry | UserEntry [SubEntry] AvatarImage
+data RightEntry = IconEntry Html [SubEntry] | SearchEntry | UserEntry [SubEntry] AvatarImage
 
 -- A subentry is just a triple (name, link, is-external-link), or horizontal
 -- dividing rule, or a "signed-in as" information item.
@@ -110,9 +110,10 @@ toplevel (Entry a (SubEntries bs), n) =
           ! A.id (H.toValue $ "subMenu-" ++ show n)
           $ mapM_ sublevel bs
 
-toplevel' :: RightEntry -> Html
-toplevel' e = case e of
-  HelpEntry bs ->
+toplevel' :: (Int, RightEntry) -> Html
+toplevel' (id, e) = case e of
+  IconEntry icon bs -> do
+    let id' = H.toValue $ "menu-" <> (show id :: Text)
     H.nav
       $ H.ul
       ! A.class_ "c-pill-navigation"
@@ -120,17 +121,10 @@ toplevel' e = case e of
       ! A.class_
           "c-pill-navigation__item c-pill-navigation__item--has-child-menu"
       $ do
-          H.button
-            ! A.type_ "button"
-            ! customAttribute "data-menu" "helpMenu"
-            $ do
-                H.div
-                  ! A.class_ "o-svg-icon o-svg-icon-circle-help  "
-                  $ H.toMarkup svgIconCircleHelp
-                H.span ! A.class_ "u-sr-accessible" $ "Help"
-          H.ul ! A.class_ "c-menu c-menu--large" ! A.id "helpMenu" $ mapM_
-            sublevel
-            bs
+          H.button ! A.type_ "button" ! customAttribute "data-menu" id' $ do
+            icon
+            H.span ! A.class_ "u-sr-accessible" $ "Help"
+          H.ul ! A.class_ "c-menu c-menu--large" ! A.id id' $ mapM_ sublevel bs
   SearchEntry -> H.div ! A.class_ "c-input-with-icon" $ do
     H.div ! A.class_ "o-svg-icon o-svg-icon-search  " $ H.toMarkup svgIconSearch
     H.input ! A.class_ "c-input" ! A.type_ "text" ! A.placeholder "Search ..."
@@ -172,11 +166,10 @@ navbar tree items =
     $ H.div
     ! A.class_ "c-navbar c-navbar--bordered-bottom c-navbar--fixed"
     $ toolbar
-        [ H.toMarkup
-          $ BrandXSmall "/" "/static/images/logo.svg" "Smart"
+        [ H.toMarkup $ BrandXSmall "/" "/static/images/logo.svg" "Smart"
         , H.nav $ H.ul ! A.class_ "c-pill-navigation" $ toNavbar tree
         ]
-        (map toplevel' items)
+        (map toplevel' $ zip [1 ..] items)
 
 navbarWebsite tree =
   navbarWebsite' $ H.nav ! A.class_ "c-design-system-nav" $ do
@@ -190,11 +183,8 @@ navbarWebsite' content =
     ! A.class_ "o-container"
     $ H.div
     ! A.class_ "c-navbar c-navbar--bordered-bottom c-navbar--main"
-    $ toolbar
-        [ H.toMarkup
-            $ BrandSmall "/" "/static/images/logo.svg" "Smart"
-        ]
-        [content]
+    $ toolbar [H.toMarkup $ BrandSmall "/" "/static/images/logo.svg" "Smart"]
+              [content]
 
 toolbar leftItems rightItems = H.div ! A.class_ "c-toolbar" $ do
   H.div ! A.class_ "c-toolbar__left" $ mapM_ item leftItems

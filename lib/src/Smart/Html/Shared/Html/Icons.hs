@@ -39,6 +39,13 @@ module Smart.Html.Shared.Html.Icons
   , svgIconEye
   , svgIconGitHub
   , svgIconMenu
+  -- * Icons with a div wrapper
+  , divIconAdd
+  , divIconOptionsHorizontal
+  , divIconCheck
+  , divIconCircleHelp
+  , divIconDelete
+  , divIconEdit
   ) where
 
 
@@ -336,3 +343,26 @@ mkSvgIcon pathDAndFills =
   where mkPathD (d, fill) = S.path ! SA.d d ! SA.fill fill
 
 mkSvgIconStdFill = mkSvgIcon . fmap (, "#595959")
+
+
+--------------------------------------------------------------------------------
+divIconOptionsHorizontal =
+  H.div ! A.class_ "o-svg-icon o-svg-icon-options-horizontal" $ H.toMarkup
+    svgIconOptionsHorizontal
+
+-- TODO I think there are double dashes: e.g. o-svg-icon--check
+divIconCheck =
+  H.div ! A.class_ "o-svg-icon o-svg-icon-check" $ H.toMarkup $ svgIconCheck
+
+divIconCircleHelp =
+  H.div ! A.class_ "o-svg-icon o-svg-icon-circle-help  " $ H.toMarkup
+    svgIconCircleHelp
+
+divIconDelete =
+  H.div ! A.class_ "o-svg-icon o-svg-icon-delete" $ H.toMarkup $ svgIconDelete
+
+divIconEdit =
+  H.div ! A.class_ "o-svg-icon o-svg-icon-edit" $ H.toMarkup $ svgIconEdit
+
+divIconAdd =
+  H.div ! A.class_ "o-svg-icon o-svg-icon-add" $ H.toMarkup $ svgIconAdd

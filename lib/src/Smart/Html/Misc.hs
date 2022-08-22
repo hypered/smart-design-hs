@@ -676,22 +676,6 @@ actionDropdownLink (icon, label, lnk) =
         icon
         H.span $ H.toHtml label
 
-divIconOptionsHorizontal =
-  H.div
-    ! A.class_ "o-svg-icon o-svg-icon-options-horizontal"
-    $ H.toMarkup
-    $ svgIconOptionsHorizontal
-
--- TODO I think there are double dashes: e.g. o-svg-icon--check
-divIconCheck =
-  H.div ! A.class_ "o-svg-icon o-svg-icon-check" $ H.toMarkup $ svgIconCheck
-
-divIconDelete =
-  H.div ! A.class_ "o-svg-icon o-svg-icon-delete" $ H.toMarkup $ svgIconDelete
-
-divIconEdit =
-  H.div ! A.class_ "o-svg-icon o-svg-icon-edit" $ H.toMarkup $ svgIconEdit
-
 divAccessible :: Text -> Html
 divAccessible = (H.div ! A.class_ "u-sr-accessible") . H.toHtml
 

@@ -7,6 +7,7 @@ module Examples.Navbar
 
 import           Smart.Html.Avatar
 import           Smart.Html.Navbar
+import           Smart.Html.Shared.Html.Icons
 
 navbars :: [Navbar]
 navbars = [exampleNavbar]
@@ -63,7 +64,7 @@ exampleNavbarWebsite = NavbarWebsite
   , Entry "Changelog"  (Link "/changelog.html")
   ]
 
-helpEntry = HelpEntry helpEntries
+helpEntry = IconEntry divIconCircleHelp helpEntries
 
 helpEntries =
   [ SubEntry "About this page" "#" False
@@ -72,9 +73,7 @@ helpEntries =
   , SubEntry "Report a bug"  "#" False
   ]
 
-userEntry = UserEntry
-  userEntries
-  (AvatarImage "/static/images/avatars/1.jpg")
+userEntry = UserEntry userEntries (AvatarImage "/static/images/avatars/1.jpg")
 
 userEntries =
   [SubEntry "My profile" "#" False, Divider, SubEntry "Sign out" "#" False]
