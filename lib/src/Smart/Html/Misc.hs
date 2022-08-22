@@ -36,7 +36,9 @@ import           Smart.Html.Navbar              ( Action(..)
                                                 , toNavbarDesktop
                                                 , toNavbarMobile
                                                 )
+import           Smart.Html.Panel               ( Panel(..) )
 import           Smart.Html.Shared.Html.Icons
+import           Smart.Html.Shared.Types        ( Title(..) )
 import           Smart.Html.SideMenu            ( SideMenu(..)
                                                 , SideMenuItem(..)
                                                 )
@@ -546,14 +548,8 @@ groupHorizontal content =
     $ content
 
 panel :: Text -> Html -> Html
-panel title content = H.div ! A.class_ "c-panel u-spacer-bottom-l" $ do
-  H.div
-    ! A.class_ "c-panel__header"
-    $ H.h2
-    ! A.class_ "c-panel__title"
-    $ H.toHtml title
-  H.div ! A.class_ "c-panel__body" $ do
-    content
+panel title content = H.div ! A.class_ "u-spacer-bottom-l" $ H.toMarkup $
+  PanelHeaderAndBody (Title title) content
 
 subform1 = formGroup $ do
   H.div ! A.class_ "o-form-group" $ do

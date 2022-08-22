@@ -11,7 +11,7 @@ import qualified Text.Blaze.Html5.Attributes   as A
 -- Additionally, we can have headers, and headers + toolbars (toolbars can contain buttons, etc. on the RHS) 
 data Panel where
   PanelBody ::Types.Body -> Panel
-  PanelHeaderAndBody ::Types.Title -> Types.Body -> Panel
+  PanelHeaderAndBody ::H.ToMarkup body => Types.Title -> body -> Panel
   PanelHeaderBodyAndToolbar ::H.ToMarkup toolbar => Types.Title -> Types.Body -> toolbar -> Panel
 
 instance H.ToMarkup Panel where
@@ -33,7 +33,11 @@ instance H.ToMarkup Panel where
           $ H.toMarkup toolbar
 
 mkPanel
-  :: forall header . H.ToMarkup header => Maybe header -> Types.Body -> H.Html
+  :: forall header body
+   . (H.ToMarkup header, H.ToMarkup body)
+  => Maybe header
+  -> body
+  -> H.Html
 mkPanel mHeader body = (H.div ! A.class_ "c-panel") $ headerM >> bodyM
  where
   headerM   = maybe mempty (headerDiv . H.toMarkup) mHeader

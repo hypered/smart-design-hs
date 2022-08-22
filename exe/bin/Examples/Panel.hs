@@ -9,7 +9,7 @@ import qualified Smart.Html.Shared.Html.Icons  as Icons
 panels :: [Panel]
 panels =
   [ PanelBody "Panel with just a body"
-  , PanelHeaderAndBody "Panel Header" "Panel Body"
+  , PanelHeaderAndBody "Panel Header" ("Panel Body" :: Text)
   , PanelHeaderBodyAndToolbar "Panel Header" "Panel Body"
     $ ButtonToolbarHorizontal [ToolbarButton Icons.svgIconAdd "Add"]
   ]
