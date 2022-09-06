@@ -4,6 +4,7 @@
 {-# LANGUAGE ConstraintKinds #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TupleSections #-}
 module Smart.Html.Misc
   ( landingHero
   , landingPanel
@@ -228,13 +229,18 @@ registration = do
                   H.div ! A.class_ "o-grid" $ do
                     inputText6 "registerFormName"      "Name"
                     inputText6 "registerFormFirstName" "First name"
-                    inputSelect6 "registerFormGender"
-                                 "Gender"
-                                 ["Male", "Female", "X"]
+                    inputSelect6
+                      "registerFormGender"
+                      "Gender"
+                      [("male", "Male"), ("female", "Female"), ("x", "X")]
                     inputSelect6
                       "registerFormLangue"
                       "Language"
-                      ["Francais", "Nederlands", "Deutsch", "Espanol"]
+                      [ ("fr", "Francais")
+                      , ("nl", "Nederlands")
+                      , ("de", "German")
+                      , ("es", "Espanol")
+                      ]
                       -- TODO Français
 
                   H.div ! A.class_ "c-hr" $ ""
@@ -275,12 +281,12 @@ registration = do
                     inputSelect6
                       "registerFormfieldMaritalStatus"
                       "Marital status"
-                      [ "Select"
-                      , "Single"
-                      , "Married"
-                      , "Widowed"
-                      , "Separated"
-                      , "Divorced"
+                      [ ("none-selected", "Select")
+                      , ("single"       , "Single")
+                      , ("married"      , "Married")
+                      , ("widowed"      , "Widowed")
+                      , ("separated"    , "Separated")
+                      , ("divorced"     , "Divorced")
                       ]
                     inputText6 "registerFormfieldCityOfBirth" "City of birth"
                     inputText6 "registerFormfieldNationalRegisterNo"
@@ -366,62 +372,73 @@ inputDate name label =
       ! A.type_ "date"
       ! A.id (H.toValue name)
 
-inputSelect_ :: Text -> Text -> [Text] -> Maybe Text -> Bool -> Html
-inputSelect_ name label values mhelp fullWidth = H.div ! A.class_ "o-form-group" $ do
-  H.label ! A.class_ "o-form-group__label" ! A.for (H.toValue name) $ H.toHtml
-    label
-  let cl = if fullWidth
-           then
-             -- TODO
-             -- Doesn't seem to work. I was looking at the Select project there
-             -- https://design.smart.coop/prototypes/old-desk/contract-create-1.html
-             -- but it's not a real `select` element.
-             "o-form-group__controls o-form-group__controls--full-width"
-           else
-             "o-form-group__controls"
-  H.div ! A.class_ cl $ do
-    H.div
-      ! A.class_ "c-select-holder"
-      $ H.select
-      ! A.class_ "c-select"
-      ! A.id (H.toValue name)
-      $ mapM_ (H.option . H.toHtml) values
-    maybe (return ())
-          (\s -> H.p ! A.class_ "c-form-help-text" $ H.toHtml s)
-          mhelp
+inputSelect_
+  :: Text -> Text -> [(Text, Text)] -> Maybe Text -> Maybe Text -> Bool -> Html
+inputSelect_ name label values mhelp mselected fullWidth =
+  H.div ! A.class_ "o-form-group" $ do
+    H.label ! A.class_ "o-form-group__label" ! A.for (H.toValue name) $ H.toHtml
+      label
+    let cl = if fullWidth
+          then
+               -- TODO
+               -- Doesn't seem to work. I was looking at the Select project there
+               -- https://design.smart.coop/prototypes/old-desk/contract-create-1.html
+               -- but it's not a real `select` element.
+               "o-form-group__controls o-form-group__controls--full-width"
+          else "o-form-group__controls"
+        fselect value = if mselected `elem` map (Just . fst) values
+          then (! (A.selected "selected"))
+          else identity
+    H.div ! A.class_ cl $ do
+      H.div
+        ! A.class_ "c-select-holder"
+        $ H.select
+        ! A.class_ "c-select"
+        ! A.id (H.toValue name)
+        ! A.name (H.toValue name)
+        $ mapM_
+            (\(value, label) -> fselect
+              value
+              (H.option ! A.value (H.toValue value) $ H.toHtml label)
+            )
+            values
+      maybe (return ())
+            (\s -> H.p ! A.class_ "c-form-help-text" $ H.toHtml s)
+            mhelp
 
-inputSelect :: Text -> Text -> [Text] -> Html
-inputSelect name label values = inputSelect_ name label values Nothing False
+inputSelect :: Text -> Text -> [(Text, Text)] -> Html
+inputSelect name label values =
+  inputSelect_ name label values Nothing Nothing False
 
-inputSelect' :: Text -> Text -> [Text] -> Text -> Html
+inputSelect' :: Text -> Text -> [(Text, Text)] -> Text -> Html
 inputSelect' name label values help =
-  inputSelect_ name label values (Just help) False
+  inputSelect_ name label values (Just help) Nothing False
 
-inputSelect6 :: Text -> Text -> [Text] -> Html
+inputSelect6 :: Text -> Text -> [(Text, Text)] -> Html
 inputSelect6 name label values = H.div ! A.class_ "o-grid-col-6" $ do
   inputSelect name label values
 
 inputTextarea :: Text -> Text -> Int -> Text -> Text -> Bool -> Html
-inputTextarea name label rows help content fullWidth = H.div ! A.class_ "o-form-group" $ do
-  H.label ! A.class_ "o-form-group__label" ! A.for (H.toValue name) $ H.toHtml
-    label
-  let cl = if fullWidth
-           then
-             -- TODO
-             -- Doesn't seem to work. I was looking at the Select project there
-             -- https://design.smart.coop/prototypes/old-desk/contract-create-1.html
-             -- but it's not a real `select` element.
-             "o-form-group__controls o-form-group__controls--full-width"
-           else
-             "o-form-group__controls"
-  H.div ! A.class_ cl $ do
-    H.textarea
-      ! A.class_ "c-textarea"
-      ! A.rows (H.toValue $ show @Int @Text rows)
-      ! A.id (H.toValue name)
-      ! A.name (H.toValue name)
-      $ H.text content
-    H.p ! A.class_ "c-form-help-text" $ H.toHtml help
+inputTextarea name label rows help content fullWidth =
+  H.div ! A.class_ "o-form-group" $ do
+    H.label ! A.class_ "o-form-group__label" ! A.for (H.toValue name) $ H.toHtml
+      label
+    let cl = if fullWidth
+          then
+               -- TODO
+               -- Doesn't seem to work. I was looking at the Select project there
+               -- https://design.smart.coop/prototypes/old-desk/contract-create-1.html
+               -- but it's not a real `select` element.
+               "o-form-group__controls o-form-group__controls--full-width"
+          else "o-form-group__controls"
+    H.div ! A.class_ cl $ do
+      H.textarea
+        ! A.class_ "c-textarea"
+        ! A.rows (H.toValue $ show @Int @Text rows)
+        ! A.id (H.toValue name)
+        ! A.name (H.toValue name)
+        $ H.text content
+      H.p ! A.class_ "c-form-help-text" $ H.toHtml help
 
 inputRadios :: Text -> Text -> [(Text, Bool)] -> Html
 inputRadios name label labels = H.div ! A.class_ "o-form-group" $ do
@@ -596,7 +613,7 @@ subform2 = formGroup $ do
   inputSelect'
     "select"
     "Select"
-    ["Choose an item", "A", "B", "C"]
+    [("none-selected", "Choose an item"), ("a", "A"), ("b", "B"), ("b", "C")]
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo accumsan risus."
   inputTextarea
     "textarea"
@@ -994,8 +1011,9 @@ banner = H.div ! A.class_ "c-global-banner c-global-banner--default" $ do
 
 
 --------------------------------------------------------------------------------
-countries :: [Text]
-countries =
+countries :: [(Text, Text)]
+countries = map
+  ("TODO", )
   [ "Afghanistan"
   , "Aland Islands"
     -- TODO "Åland Islands"
