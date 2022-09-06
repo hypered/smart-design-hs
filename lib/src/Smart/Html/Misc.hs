@@ -49,12 +49,8 @@ import           Text.Blaze                     ( customAttribute )
 import qualified Text.Blaze.Html5              as H
 import           Text.Blaze.Html5               ( (!)
                                                 , Html
-                                                , preEscapedToHtml
-                                                , toHtml
                                                 )
 import qualified Text.Blaze.Html5.Attributes   as A
-import qualified Text.Blaze.Svg11              as S
-import qualified Text.Blaze.Svg11.Attributes   as SA
 
 
 landingHero title content =
@@ -386,7 +382,7 @@ inputSelect_ name label values mhelp mselected fullWidth =
                -- but it's not a real `select` element.
                "o-form-group__controls o-form-group__controls--full-width"
           else "o-form-group__controls"
-        fselect value = if mselected `elem` map (Just . fst) values
+        fselect value = if mselected == Just value
           then (! (A.selected "selected"))
           else identity
     H.div ! A.class_ cl $ do

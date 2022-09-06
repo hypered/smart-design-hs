@@ -73,11 +73,11 @@ toNavbarDesktop tree =
 toNavbarMobile tree =
   H.div ! A.class_ "c-design-system-nav__mobile" $ H.ul $ mapM_
     toplevelMobile
-    (zip tree [1 ..])
+    tree
 
-toplevelMobile (Entry a (Link lnk), _) =
+toplevelMobile (Entry a (Link lnk)) =
   H.li $ H.a ! A.href (H.toValue lnk) $ H.toHtml a
-toplevelMobile (Entry a (SubEntries bs), n) = H.li $ do
+toplevelMobile (Entry a (SubEntries bs)) = H.li $ do
   H.span $ H.toHtml a
   H.ul $ do
     mapM_ sublevelMobile bs

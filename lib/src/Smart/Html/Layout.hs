@@ -10,10 +10,6 @@ module Smart.Html.Layout
   , withSideMenuFullScroll
   ) where
 
-import qualified Data.Text                     as T
-import qualified Smart.Html.Dsl                as Dsl
-import qualified Text.Blaze.Html.Renderer.Pretty
-                                               as R
 import qualified Text.Blaze.Html5              as H
 import           Text.Blaze.Html5               ( (!) )
 import qualified Text.Blaze.Html5.Attributes   as A
