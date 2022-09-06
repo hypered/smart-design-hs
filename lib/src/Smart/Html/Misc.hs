@@ -24,6 +24,8 @@ module Smart.Html.Misc
   , webEmpty
   , webPage
   , js
+  , inputSelect_
+  , inputTextarea
   , divIconCheck
   , divIconDelete
   , divIconEdit
@@ -364,11 +366,20 @@ inputDate name label =
       ! A.type_ "date"
       ! A.id (H.toValue name)
 
-inputSelect_ :: Text -> Text -> [Text] -> Maybe Text -> Html
-inputSelect_ name label values mhelp = H.div ! A.class_ "o-form-group" $ do
+inputSelect_ :: Text -> Text -> [Text] -> Maybe Text -> Bool -> Html
+inputSelect_ name label values mhelp fullWidth = H.div ! A.class_ "o-form-group" $ do
   H.label ! A.class_ "o-form-group__label" ! A.for (H.toValue name) $ H.toHtml
     label
-  H.div ! A.class_ "o-form-group__controls" $ do
+  let cl = if fullWidth
+           then
+             -- TODO
+             -- Doesn't seem to work. I was looking at the Select project there
+             -- https://design.smart.coop/prototypes/old-desk/contract-create-1.html
+             -- but it's not a real `select` element.
+             "o-form-group__controls o-form-group__controls--full-width"
+           else
+             "o-form-group__controls"
+  H.div ! A.class_ cl $ do
     H.div
       ! A.class_ "c-select-holder"
       $ H.select
@@ -380,26 +391,36 @@ inputSelect_ name label values mhelp = H.div ! A.class_ "o-form-group" $ do
           mhelp
 
 inputSelect :: Text -> Text -> [Text] -> Html
-inputSelect name label values = inputSelect_ name label values Nothing
+inputSelect name label values = inputSelect_ name label values Nothing False
 
 inputSelect' :: Text -> Text -> [Text] -> Text -> Html
 inputSelect' name label values help =
-  inputSelect_ name label values (Just help)
+  inputSelect_ name label values (Just help) False
 
 inputSelect6 :: Text -> Text -> [Text] -> Html
 inputSelect6 name label values = H.div ! A.class_ "o-grid-col-6" $ do
   inputSelect name label values
 
-inputTextarea :: Text -> Text -> Int -> Text -> Html
-inputTextarea name label rows help = H.div ! A.class_ "o-form-group" $ do
+inputTextarea :: Text -> Text -> Int -> Text -> Text -> Bool -> Html
+inputTextarea name label rows help content fullWidth = H.div ! A.class_ "o-form-group" $ do
   H.label ! A.class_ "o-form-group__label" ! A.for (H.toValue name) $ H.toHtml
     label
-  H.div ! A.class_ "o-form-group__controls" $ do
+  let cl = if fullWidth
+           then
+             -- TODO
+             -- Doesn't seem to work. I was looking at the Select project there
+             -- https://design.smart.coop/prototypes/old-desk/contract-create-1.html
+             -- but it's not a real `select` element.
+             "o-form-group__controls o-form-group__controls--full-width"
+           else
+             "o-form-group__controls"
+  H.div ! A.class_ cl $ do
     H.textarea
       ! A.class_ "c-textarea"
       ! A.rows (H.toValue $ show @Int @Text rows)
       ! A.id (H.toValue name)
-      $ ""
+      ! A.name (H.toValue name)
+      $ H.text content
     H.p ! A.class_ "c-form-help-text" $ H.toHtml help
 
 inputRadios :: Text -> Text -> [(Text, Bool)] -> Html
@@ -582,6 +603,8 @@ subform2 = formGroup $ do
     "Textarea"
     5
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo accumsan risus."
+    ""
+    False
 
 subform3 = formGroup $ do
   H.div ! A.class_ "o-form-group" $ do
@@ -1315,7 +1338,7 @@ form = vertically $ mapM_ (uncurry panel) [("Contract type", subform1')]
 
 subform1' = groupHorizontal $ do
   inputDialog "position" "Your position"
-  inputTextarea "description" "Description of the contract" 5 ""
+  inputTextarea "description" "Description of the contract" 5 "" "" False
   inputSelect "work-country" "Work country" countries
   inputRadios
     "has-risks"
