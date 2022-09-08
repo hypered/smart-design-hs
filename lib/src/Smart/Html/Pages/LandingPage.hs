@@ -22,31 +22,33 @@ landingPage :: HtmlCanvas
 landingPage = Dsl.SingletonCanvas $ do
   H.toMarkup navigation
   landing
-  Misc.landingFooter "https://github.com/hypered/smart-design-hs"
+  Misc.landingFooter "https://github.com/hypered/curiosity"
 
 navigation :: NavbarWebsite
 navigation = NavbarWebsite
   [Entry "Documentation" (Link "/documentation"), Entry "Login" (Link "/login"), Entry "Sign up" (Link "/signup")]
 
 landing = H.main ! A.class_ "o-container o-container--flex" $ do
-  Misc.landingHero "Curiosity, a working prototype to redefine our software"
+  Misc.landingHero "Curiosity, a prototype to redefine Smart Coop's software"
     $ do
         H.p $ do
           "This site is a running instance of Curiosity, an always \
           \work-in-progress system to think, discuss, and communicate \
-          \the future of our developments."
+          \the future of "
+          H.a ! A.href "https://smartbe.be" $ "Smart Coop"
+          " developments."
         H.toMarkup $ Alert
           AlertWarning
           iconWarning
-          "This site is up for demonstration purpose only. Data are \
-          \frequently permanently erased. Please use this site only \
+          "This site is up for demonstration purpose only. Data are public \
+          \and frequently permanently erased. Please use this site only \
           \if you understand what this means."
           NoButton
   H.div ! A.class_ "o-grid" $ do
     Misc.landingPanel "Open source" $ H.p $ do
       "This project is open source "
       "and available "
-      H.a ! A.href "https://github.com/hypered/smart-design-hs" $ "on GitHub"
+      H.a ! A.href "https://github.com/hypered/curiosity" $ "on GitHub"
       "."
     Misc.landingPanel "Experimental" $ H.p $ do
       "Curiosity is being developed to inform further developments, and "

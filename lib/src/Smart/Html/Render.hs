@@ -61,7 +61,7 @@ smartDesignHead =
     H.meta
       ! A.name "description"
       ! A.content
-          "Curiosity is an ever-evolving prototype system to think, discuss, and communicate the future of Smart Belgium's developments."
+          "Curiosity is an ever-evolving prototype system to think, discuss, and communicate the future of Smart Coop's software."
   maincss  = stylesheet "main.css"
   stylesheet file =
     H.link ! A.rel "stylesheet" ! A.href ("/static/css/" <> file)
