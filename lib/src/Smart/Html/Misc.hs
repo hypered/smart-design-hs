@@ -26,10 +26,12 @@ module Smart.Html.Misc
   , webPage
   , js
   , inputSelect_
+  , inputSelect
   , inputTextarea
   , divIconCheck
   , divIconDelete
   , divIconEdit
+  , countries
   ) where
 
 import           Smart.Html.Layout
@@ -659,7 +661,7 @@ subform3 = formGroup $ do
 
 --------------------------------------------------------------------------------
 exampleTable = do
-  table titles display rows
+  table "example" titles display rows
   pagination
  where
   titles = ["Data", "Data", "Data"]
@@ -671,21 +673,21 @@ exampleTable = do
   rows = replicate 10 ["Data", "Data", "Data"]
 
 table
-  :: [Text] -> (a -> ([Text], [(Html, Text, Text)], Maybe Text)) -> [a] -> Html
-table titles display items = H.div ! A.class_ "u-padding-horizontal-s" $ do
+  :: Text -> [Text] -> (a -> ([Text], [(Html, Text, Text)], Maybe Text)) -> [a] -> Html
+table id titles display items = H.div ! A.class_ "u-padding-horizontal-s" $ do
   H.table ! A.class_ "c-table c-table--styled js-data-table" $ do
     H.thead . H.tr . mapM_ (H.th . H.toHtml) $ titles ++ [""]
     H.tbody $ mapM_
-      (\(id, item) ->
+      (\(id', item) ->
         let (row, actions, mdetail) = display item
         in  H.tr $ do
-              mapM_ H.td $ map H.toHtml row ++ [rowAction id actions mdetail]
+              mapM_ H.td $ map H.toHtml row ++ [rowAction id id' actions mdetail]
       )
       (zip [1 ..] items)
 
-rowAction :: Int -> [(Html, Text, Text)] -> Maybe Text -> Html
-rowAction id actions mlnk = H.div ! A.class_ "c-button-toolbar" $ do
-  let id' = H.toValue $ "action-dropdown-" <> (show id :: Text)
+rowAction :: Text -> Int -> [(Html, Text, Text)] -> Maybe Text -> Html
+rowAction id n actions mlnk = H.div ! A.class_ "c-button-toolbar" $ do
+  let id' = H.toValue $ "action-dropdown-" <> id <> "-" <> (show n :: Text)
   when (not $ null actions) $ do
     H.button
       ! A.class_ "c-button c-button--borderless c-button--icon"
