@@ -44,6 +44,7 @@ module Smart.Html.Shared.Html.Icons
   , divIconOptionsHorizontal
   , divIconCheck
   , divIconCircleHelp
+  , divIconClose
   , divIconDelete
   , divIconEdit
   ) where
@@ -355,8 +356,12 @@ divIconCheck =
   H.div ! A.class_ "o-svg-icon o-svg-icon-check" $ H.toMarkup $ svgIconCheck
 
 divIconCircleHelp =
-  H.div ! A.class_ "o-svg-icon o-svg-icon-circle-help  " $ H.toMarkup
+  H.div ! A.class_ "o-svg-icon o-svg-icon-circle-help" $ H.toMarkup
     svgIconCircleHelp
+
+divIconClose =
+  H.div ! A.class_ "o-svg-icon o-svg-icon-close" $ H.toMarkup
+    svgIconClose
 
 divIconDelete =
   H.div ! A.class_ "o-svg-icon o-svg-icon-delete" $ H.toMarkup $ svgIconDelete

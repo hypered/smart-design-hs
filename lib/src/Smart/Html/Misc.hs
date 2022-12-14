@@ -29,6 +29,7 @@ module Smart.Html.Misc
   , inputSelect
   , inputTextarea
   , divIconCheck
+  , divIconClose
   , divIconDelete
   , divIconEdit
   , countries
