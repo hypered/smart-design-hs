@@ -32,7 +32,10 @@ landing = H.main ! A.class_ "o-container o-container--flex" $ do
   Misc.landingHero "Curiosity, a prototype to redefine Smart Coop's software"
     $ do
         H.p $ do
-          "This site is a running instance of Curiosity, an always \
+          "This site is a running instance of Curiosity. \
+          \Curiosity was a project carried roughly from July \
+          \2022 till January 2023 included. \
+          \It was an always \
           \work-in-progress system to think, discuss, and communicate \
           \the future of "
           H.a ! A.href "https://smartbe.be" $ "Smart Coop"
@@ -41,6 +44,7 @@ landing = H.main ! A.class_ "o-container o-container--flex" $ do
           AlertWarning
           iconWarning
           "This site is up for demonstration purpose only. Data are public \
+          \(including passwords) \
           \and frequently permanently erased. Please use this site only \
           \if you understand what this means."
           NoButton
