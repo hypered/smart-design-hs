@@ -1,8 +1,8 @@
-# The Smart design system, a Haskell implementation
+# A Haskell implementation of `hypered/smart-design`
 
-The [Smart design system](https://design.smart.coop/) contains a reference
-implementation of the design system itself. This repository is a Haskell
-implementation, intended to be used in prototyping.
+[mono.hypered.design](https://mono.hypered.design/) contains a reference
+implementation of a design system. This repository is a Haskell implementation,
+intended to be used in prototyping.
 
 This repository contains both a library and an executable. The library presents
 is written with `blaze-html`. The executable is used to recreate components and
@@ -11,7 +11,7 @@ example pages.
 A [GitHub
 Action](https://github.com/hypered/smart-design-hs/blob/main/.github/workflows/deployment.yml)
 is setup to generate pages and serve them at
-[design.smartcoop.sh](https://design.smartcoop.sh/).
+[monohs.hypered.design](https://monohs.hypered.design/).
 
 ## The structure
 
@@ -19,7 +19,7 @@ The code is organized as a Cabal project, with two packages:
 
 - `design-hs-lib`: the library itself.
 - `design-hs-exe`: the executable server that provides us with a page like
-  https://design.smart.coop/development/docs/, but using the lib.
+  https://mono.hypered.design/development/docs/, but using the lib.
 
 ## Notes on ease of development.
 

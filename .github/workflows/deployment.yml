@@ -20,7 +20,7 @@ jobs:
     - name: Copy nix build results
       run: cp -r result/html/* _site/
     - name: Add CNAME
-      run: echo design.smartcoop.sh > _site/CNAME
+      run: echo monohs.hypered.design > _site/CNAME
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
