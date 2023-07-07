@@ -113,5 +113,5 @@ signupPageAlt = Dsl.SingletonCanvas $ do
                       ! A.class_ "c-button__label"
                       $ "Sign up"
                     H.div ! A.class_ "o-form-group u-ta-center" $ ""
-        H.div ! A.class_ "c-content u-text-center u-spacer-top-l" $ do
+        H.div ! A.class_ "c-text u-text-center u-spacer-top-l" $ do
           H.a ! A.class_ "u-text-muted" ! A.href "#" $ "Log in"

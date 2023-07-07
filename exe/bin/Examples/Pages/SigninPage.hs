@@ -94,7 +94,7 @@ signinPage = Dsl.SingletonCanvas $ do
                       $ "Register your account"
                     H.div ! A.class_ "o-form-group u-ta-center" $ ""
         H.div
-          ! A.class_ "c-content u-text-center u-spacer-top-l"
+          ! A.class_ "c-text u-text-center u-spacer-top-l"
           $ H.a
           ! A.class_ "u-text-muted"
           ! A.href "#"
@@ -212,7 +212,7 @@ signinPageAlt = Dsl.SingletonCanvas $ do
                       ! A.class_ "c-button__label"
                       $ "Log in"
                     H.div ! A.class_ "o-form-group u-ta-center" $ ""
-        H.div ! A.class_ "c-content u-text-center u-spacer-top-l" $ do
+        H.div ! A.class_ "c-text u-text-center u-spacer-top-l" $ do
           H.a ! A.class_ "u-text-muted" ! A.href "#" $ "Sign up"
           " | "
           H.a ! A.class_ "u-text-muted" ! A.href "#" $ "Forgot password"

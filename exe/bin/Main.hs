@@ -119,7 +119,7 @@ mainWithConf cnf@(CT.Conf CT.FilesystemConf {..}) = do
       $ H.div
       ! A.class_ "o-container-vertical"
       $ H.div
-      ! A.class_ "c-display"
+      ! A.class_ "c-content"
       $ content
 
   -- TODO Remove duplication.
@@ -292,7 +292,7 @@ componentPage elems = Dsl.SingletonCanvas $ do
           $ H.h1
           ! A.class_ "br-componentgroup-header c-d-h2"
           $ "Title"
-        H.div ! A.class_ "br-content c-content" $ H.p "Paragraph paragraph."
+        H.div ! A.class_ "br-content c-text" $ H.p "Paragraph paragraph."
         H.toMarkup $ sampleContents elems
 
 flexDisplay content =

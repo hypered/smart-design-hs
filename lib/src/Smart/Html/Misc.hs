@@ -68,7 +68,7 @@ landingHero title content =
           ! A.class_ "o-flex o-flex o-flex--vertical-center"
           ! A.style "height: 100%;"
           $ H.div
-          ! A.class_ "c-display"
+          ! A.class_ "c-content"
           $ do
               H.h1 title
               content
@@ -82,7 +82,7 @@ landingPanel title content =
     $ H.div
     ! A.class_ "c-panel__body"
     $ H.div
-    ! A.class_ "c-display"
+    ! A.class_ "c-content"
     $ do
         H.h2 title
         content
@@ -210,7 +210,7 @@ registration = do
               ! A.alt "Smart"
             H.div ! A.class_ "c-hr" $ ""
             H.h1 ! A.class_ "c-h2" $ "Register your account"
-            H.div ! A.class_ "c-content" $ H.p $ do
+            H.div ! A.class_ "c-text" $ H.p $ do
               "For optimal use of the Smart services, it is highly recommended to attend a Smart session: view our "
               H.a ! A.href "#" $ "user manual"
               "."
@@ -566,7 +566,7 @@ panels = panels_ Nothing
 panels' = panels_ . Just
 
 panels_ mtitle = vertically $ do
-  maybe (return ()) (\t -> H.div ! A.class_ "c-content" $ H.h1 t) mtitle
+  maybe (return ()) (\t -> H.div ! A.class_ "c-text" $ H.h1 t) mtitle
   mapM_ (panel "Form grouping") [subform1, subform2, subform3]
 
 vertically content =
@@ -985,7 +985,7 @@ alertTitleAndContent title content =
       H.div
         ! A.class_ "c-alert__message"
         $ H.div
-        ! A.class_ "c-content"
+        ! A.class_ "c-text"
         $ content
 
 
@@ -1458,7 +1458,7 @@ article title mdate content authors =
       H.h1 ! A.class_ "c-d-h1" $ title
       maybe (return ()) H.p mdate
     H.div ! A.class_ "c-blog-article__content" $ do
-      H.div ! A.class_ "c-display" $ content
+      H.div ! A.class_ "c-content" $ content
       authors
 
 

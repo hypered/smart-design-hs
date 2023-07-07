@@ -25,9 +25,11 @@ navigation = NavbarWebsite
   ]
 
 landing = H.main ! A.class_ "o-container o-container--flex" $ do
-  Misc.landingHero "Smart's design system, implemented in Haskell" $ H.p $ do
-    "This site presents a Haskell implementation of the "
-    H.a ! A.href "http://design.smart.coop" $ "Smart design system"
+  Misc.landingHero "A work-in-progress design system, implemented in Haskell" $ H.p $ do
+    "This site presents a Haskell implementation of a "
+    H.a ! A.href "http://design.smart.coop" $ "design system"
+    "originally written for Smart, then later modified to look like"
+    H.a ! A.href "http://hypered.design" $ "Struct"
     "."
   H.div ! A.class_ "o-grid" $ do
     Misc.landingPanel "Open source" $ H.p $ do

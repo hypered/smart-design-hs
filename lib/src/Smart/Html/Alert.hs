@@ -56,5 +56,5 @@ instance H.ToMarkup Alert where
       bodyHtml =
         Helpers.multiNestedClassedElems
             H.div
-            ["c-alert__body", "c-alert__text", "c-alert__message", "c-content"]
+            ["c-alert__body", "c-alert__text", "c-alert__message", "c-text"]
           $ H.toMarkup body
