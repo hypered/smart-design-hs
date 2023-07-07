@@ -1481,7 +1481,7 @@ myHeader =
     $ H.div
     ! A.class_ "o-container"
     $ H.div
-    ! A.class_ "c-navbar c-navbar--bordered-bottom c-navbar--main"
+    ! A.class_ "c-navbar c-navbar--bordered-bottom c-navbar--page"
     $ H.div
     ! A.class_ "c-toolbar"
     $ do

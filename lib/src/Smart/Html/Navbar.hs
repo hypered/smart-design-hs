@@ -182,7 +182,7 @@ navbarWebsite' content =
     $ H.div
     ! A.class_ "o-container"
     $ H.div
-    ! A.class_ "c-navbar c-navbar--bordered-bottom c-navbar--main"
+    ! A.class_ "c-navbar c-navbar--bordered-bottom c-navbar--page"
     $ toolbar [H.toMarkup $ BrandSmall "/" "/static/images/logo.svg" "Smart"]
               [content]
 
