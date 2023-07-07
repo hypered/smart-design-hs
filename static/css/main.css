@@ -1,88 +1,5 @@
 @charset "UTF-8";
-/* ==========================================================================
-  Stylesheet for Smart
-  ITCSS + BEM
-  ---
-  This SCSS code is inspired by BEM (Block Element Modifier) and ITCSS (Inverted Triangle CSS) methodologies.
-  For BEM Please refer to http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/
-  For ITCSS Please refer to https://speakerdeck.com/dafed/managing-css-projects-with-itcss
-   ========================================================================== */
-/* Settings: preprocessor variables, colors, global settings
-   ========================================================================== */
-/* ==========================================================================
-  Colors
-  Only define colors here. Don't use sass color functions, stick to hex values,
-  or the color component in styleguide won't regenerate automatically anymore.
- ========================================================================== */
-/* Base
- ========================================================================== */
-/* Reds
- ========================================================================== */
-/* Yellows
-========================================================================== */
-/* Greens
- ========================================================================== */
-/* Blues
- ========================================================================== */
-/* Semantic colors
- ========================================================================== */
-/* ==========================================================================
-  Fonts
- ========================================================================== */
-@font-face {
-  font-family: 'Inter UI';
-  font-style: normal;
-  font-weight: 400;
-  src: url("../fonts/inter-ui-regular.woff2") format("woff2"), url("../fonts/inter-ui-regular.woff") format("woff"); }
-
-@font-face {
-  font-family: 'Inter UI';
-  font-style: normal;
-  font-weight: 500;
-  src: url("../fonts/inter-ui-medium.woff2") format("woff2"), url("../fonts/inter-ui-medium.woff") format("woff"); }
-
-@font-face {
-  font-family: 'Inter UI';
-  font-style: normal;
-  font-weight: 600;
-  src: url("../fonts/inter-ui-semibold.woff2") format("woff2"), url("../fonts/inter-ui-semibold.woff") format("woff"); }
-
-@font-face {
-  font-family: 'Inter UI';
-  font-style: normal;
-  font-weight: 700;
-  src: url("../fonts/inter-ui-bold.woff2") format("woff2"), url("../fonts/inter-ui-bold.woff") format("woff"); }
-
-@font-face {
-  font-family: 'Inter UI';
-  font-style: normal;
-  font-weight: 800;
-  src: url("../fonts/inter-ui-extrabold.woff2") format("woff2"), url("../fonts/inter-ui-extrabold.woff") format("woff"); }
-
-/* ==========================================================================
-   Variables
-   ---
-   Global SCSS variables (override default values defined in component files)
-   ========================================================================== */
-/* Typography
-   ========================================================================== */
-/* Colors
-   ========================================================================== */
-/* Breakpoints
-   ========================================================================== */
-/* Z-index stack
-   ========================================================================== */
-/* Bars
-   ========================================================================== */
-/* General
-   ========================================================================== */
-/* Form groups
-   ========================================================================== */
-/* Button overrides
-   ========================================================================== */
-/* Generic: CSS reset, box-sizing, global CSS tweaks
-   ========================================================================== */
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -129,6 +46,84 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+*,
+*:before,
+*:after {
+  box-sizing: border-box; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  font-size: 1.6rem; }
+
+/* Settings: preprocessor variables, colors, global settings
+   ========================================================================== */
+/* ==========================================================================
+  Colors
+  Only define colors here. Don't use sass color functions, stick to hex values,
+  or the color component in styleguide won't regenerate automatically anymore.
+ ========================================================================== */
+/* Base
+ ========================================================================== */
+/* Reds
+ ========================================================================== */
+/* Yellows
+========================================================================== */
+/* Greens
+ ========================================================================== */
+/* Blues
+ ========================================================================== */
+/* Semantic colors
+ ========================================================================== */
+/* ==========================================================================
+  Fonts
+ ========================================================================== */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/IBMPlexSans-Regular.woff2") format("woff2"), url("../fonts/IBMPlexSans-Regular.woff") format("woff"); }
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/IBMPlexSans-Medium.woff2") format("woff2"), url("../fonts/IBMPlexSans-Medium.woff") format("woff"); }
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url("../fonts/IBMPlexSans-SemiBold.woff2") format("woff2"), url("../fonts/IBMPlexSans-SemiBold.woff") format("woff"); }
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/IBMPlexSans-Bold.woff2") format("woff2"), url("../fonts/IBMPlexSans-Bold.woff") format("woff"); }
+
+/* ==========================================================================
+   Variables
+   ---
+   Global SCSS variables (override default values defined in component files)
+   ========================================================================== */
+/* Typography
+   ========================================================================== */
+/* Colors
+   ========================================================================== */
+/* Breakpoints
+   ========================================================================== */
+/* Z-index stack
+   ========================================================================== */
+/* Bars
+   ========================================================================== */
+/* General
+   ========================================================================== */
+/* Form groups
+   ========================================================================== */
+/* Button overrides
+   ========================================================================== */
 /* Elements: element selectors, CMS-generated content
    ========================================================================== */
 /* ==========================================================================
@@ -138,11 +133,6 @@ table {
    ========================================================================== */
 /* Elements
    ========================================================================== */
-*,
-*:before,
-*:after {
-  box-sizing: border-box; }
-
 html {
   font-size: 54.16%; }
   @media (min-width: 900px) {
@@ -153,10 +143,10 @@ html {
       font-size: 62.5%; } }
 
 body {
-  font-family: "Inter UI", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 1.6rem;
   line-height: 1.5;
-  color: #333333;
+  color: #000000;
   background: #FFF; }
 
 img,
@@ -171,7 +161,7 @@ select {
   font-size: inherit; }
 
 a {
-  color: #1267FB;
+  color: #0000FF;
   text-decoration: none; }
 
 em, i {
@@ -217,14 +207,34 @@ abbr[title] {
 
 .o-container--medium {
   margin: 0 auto;
-  max-width: 72rem; }
+  max-width: 68rem; }
 
 .o-container--large {
   margin: 0 auto;
-  max-width: 94rem; }
+  max-width: 96rem; }
+
+.o-container--full {
+  margin: 0;
+  max-width: 100%;
+  width: 100%; }
 
 .o-container--flex {
   flex: 1; }
+
+.o-container--eccentric {
+  margin: 0 2.4rem; }
+  @media (min-width: 700px) {
+    .o-container--eccentric {
+      margin: 0 17.77%; } }
+  @media (min-width: 900px) {
+    .o-container--eccentric {
+      margin: 0 16rem; } }
+
+.o-container--left {
+  margin: 0 2.4rem; }
+  @media (min-width: 1200px) {
+    .o-container--left {
+      margin: 0 3.2rem; } }
 
 @media (min-width: 700px) {
   .o-container-bp2 {
@@ -232,9 +242,9 @@ abbr[title] {
   .o-container-bp2--small {
     max-width: 56rem; }
   .o-container-bp2--medium {
-    max-width: 72rem; }
+    max-width: 68rem; }
   .o-container-bp2--large {
-    max-width: 94rem; } }
+    max-width: 96rem; } }
 
 /* ==========================================================================
   Container vertical
@@ -862,53 +872,53 @@ abbr[title] {
    + helpers for article style content
    ========================================================================== */
 /* ==========================================================================
-  c-content
+  c-text
   ---
-  Usage: wrap a .c-content class around content to turn it into rich text.
+  Usage: wrap a .c-text class around content to turn it into rich text.
 
   .c-h1, .c-h2, .c-body-1, c-body 2
   ---
   Usage: use these classes to style individual components like their rich text equivalent
    ========================================================================== */
 .c-h1, .c-h2, .c-h3, .c-h4,
-.c-content h1,
-.c-content h2,
-.c-content h3,
-.c-content h4 {
+.c-text h1,
+.c-text h2,
+.c-text h3,
+.c-text h4 {
   color: #1A1A1A; }
 
-.c-h1, .c-content h1 {
-  font-family: "Inter UI", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-weight: 500;
+.c-h1, .c-text h1 {
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 600;
   font-size: 2.4rem;
   margin: 0 0 3.2rem;
   line-height: 1.25; }
 
-.c-h2, .c-content h2 {
-  font-family: "Inter UI", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-weight: 500;
+.c-h2, .c-text h2 {
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 600;
   font-size: 2.2rem;
   margin: 0 0 2.4rem;
   line-height: 1.3; }
 
-.c-h3, .c-content h3 {
-  font-family: "Inter UI", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-weight: 500;
+.c-h3, .c-text h3 {
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 600;
   font-size: 2rem;
   margin: 0 0 1.6rem;
   line-height: 1.4; }
 
-.c-h4, .c-content h4 {
-  font-family: "Inter UI", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+.c-h4, .c-text h4 {
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 1.8rem;
-  font-weight: 500;
+  font-weight: 600;
   margin: 0 0 0.8rem; }
 
 .c-body-1 {
   font-size: 1.6rem;
   margin: 1.5rem 0; }
 
-.c-body-2, .c-content p small {
+.c-body-2, .c-text p small {
   font-size: 1.4rem;
   margin: 1.4rem 0; }
 
@@ -917,87 +927,89 @@ abbr[title] {
   color: #808080; }
 
 .c-link,
-.c-content a:not(.c-button) {
+.c-text a:not(.c-button) {
   text-decoration: none;
-  border-bottom: 0.1rem solid rgba(18, 103, 251, 0.33); }
+  border-bottom: 0.1rem solid rgba(0, 0, 255, 0.33); }
   .c-link.u-text-muted,
-  .c-content a:not(.c-button).u-text-muted {
+  .c-text a:not(.c-button).u-text-muted {
     color: #808080;
     border-color: rgba(128, 128, 128, 0.33); }
 
-.c-content p {
+.c-text p {
   margin: 1.5rem 0; }
 
-.c-content dl {
+.c-text dl {
   border: 1px solid #E5E5E5;
   border-radius: .3rem;
   overflow: hidden;
   padding: 1.2rem;
   margin: 1.5rem 0; }
-  .c-content dl dt {
+  .c-text dl dt {
     float: left;
     width: 30%;
     clear: left;
     font-weight: 500; }
-  .c-content dl dd {
+  .c-text dl dd {
     float: left;
     width: 70%; }
 
-.c-content ul, .c-content ol {
+.c-text ul, .c-text ol {
   padding-left: 3rem;
   margin: 1.5rem 0; }
-  .c-content ul ul, .c-content ul ol, .c-content ol ul, .c-content ol ol {
+  .c-text ul ul, .c-text ul ol, .c-text ol ul, .c-text ol ol {
     margin: 0; }
 
-.c-content ul {
+.c-text ul {
   list-style: disc; }
 
-.c-content ol {
+.c-text ol {
   list-style: decimal; }
 
 /* ==========================================================================
-  c-display
+  c-content
   ---
-  Usage: wrap a .c-display class around content to turn it into rich text.
-  Similar to .c-content, but meant for a reading context.
+  Usage: wrap a .c-content class around content to turn it into rich text.
+  Similar to .c-text, but meant for a reading context.
 
    ========================================================================== */
-.c-display {
-  font-size: 1.8rem;
-  line-height: 1.72; }
+.c-content {
+  font-size: 1.6rem;
+  line-height: 1.5; }
 
 .c-d-h1, .c-d-h2, .c-d-h3, .c-d-h4,
-.c-display h1,
-.c-display h2,
-.c-display h3,
-.c-display h4 {
+.c-content h1,
+.c-content h2,
+.c-content h3,
+.c-content h4 {
   color: #1A1A1A; }
 
-.c-d-h1, .c-display h1,
-.c-d-h2, .c-display h2,
-.c-d-h3, .c-display h3,
-.c-d-h4, .c-display h4 {
-  font-family: "Inter UI", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.c-d-h1, .c-content h1,
+.c-d-h2, .c-content h2,
+.c-d-h3, .c-content h3,
+.c-d-h4, .c-content h4 {
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 
-.c-d-h1, .c-display h1 {
-  font-size: 3.8rem;
-  margin: 4.8rem 0 3.2rem;
+.c-d-h1, .c-content h1 {
+  font-size: 4.8rem;
+  font-weight: 600;
   line-height: 1.25;
-  font-weight: 700; }
+  letter-spacing: -0.05em;
+  margin: 3rem 0 3.2rem; }
 
-.c-d-h2, .c-display h2 {
-  font-size: 3rem;
-  margin: 4.8rem 0 2.4rem;
-  line-height: 1.36;
-  font-weight: 600; }
+.c-d-h2, .c-content h2 {
+  font-size: 3.6rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.05em;
+  margin: 3.6rem 0 2.4rem; }
 
-.c-d-h3, .c-display h3 {
+.c-d-h3, .c-content h3 {
   font-size: 2.6rem;
   margin: 3.2rem 0 1.8rem;
   line-height: 1.36;
   font-weight: 600; }
 
-.c-d-h4, .c-display h4 {
+.c-d-h4, .c-content h4 {
   font-size: 2.2rem;
   margin: 2.4rem 0 1.6rem;
   line-height: 1.36;
@@ -1007,10 +1019,10 @@ abbr[title] {
 .c-d-h2:first-child,
 .c-d-h3:first-child,
 .c-d-h4:first-child,
-.c-display h1:first-child,
-.c-display h2:first-child,
-.c-display h3:first-child,
-.c-display h4:first-child {
+.c-content h1:first-child,
+.c-content h2:first-child,
+.c-content h3:first-child,
+.c-content h4:first-child {
   margin-top: 0; }
 
 .c-d-body-1 {
@@ -1022,22 +1034,22 @@ abbr[title] {
   margin: 1.6rem 0;
   line-height: 1.72; }
 
-.c-display p {
-  margin: 1.8rem 0; }
+.c-content p {
+  margin: 1.6rem 0; }
 
-.c-display small {
+.c-content small {
   font-size: 1.6rem;
   margin: 1.6rem 0;
   line-height: 1.72; }
 
-.c-display .c-sidenote {
+.c-content .c-sidenote {
   color: #808080;
   display: block;
   font-size: 1.4rem;
   line-height: 1.6;
   margin: 1.6rem 0; }
   @media (min-width: 1200px) {
-    .c-display .c-sidenote {
+    .c-content .c-sidenote {
       float: right;
       clear: right;
       width: 32rem;
@@ -1046,190 +1058,192 @@ abbr[title] {
       position: relative;
       vertical-align: baseline; } }
 
-.c-display a {
+.c-content a {
   text-decoration: none;
-  color: #1267FB;
-  border-bottom: 0.1rem solid rgba(18, 103, 251, 0.33); }
+  color: #0000FF; }
 
-.c-display ul, .c-display ol {
+.c-content ul, .c-content ol {
   padding-left: 3.2rem;
   margin: 1.8rem 0; }
-  .c-display ul ul, .c-display ul ol, .c-display ol ul, .c-display ol ol {
+  .c-content ul ul, .c-content ul ol, .c-content ol ul, .c-content ol ol {
     margin: 0; }
 
-.c-display ul {
+.c-content ul {
   list-style: disc; }
 
-.c-display ol {
+.c-content ol {
   list-style: decimal; }
 
-.c-display pre {
+.c-content pre {
   margin: 1.6rem 0; }
 
-.c-display figure {
+.c-content figure {
   margin: 3.2rem 0; }
 
-.c-display figure img {
+.c-content figure img {
   border: 0.1rem solid #E5E5E5; }
 
-.c-display figcaption {
+.c-content figcaption {
   color: #808080;
   font-size: 1.4rem; }
 
-.c-display hr {
-  margin: 3.2rem 0;
+.c-content hr {
+  color: #000000;
+  background-color: #000000;
+  width: 12.8rem;
   border: none;
-  border-bottom: 1px solid #D9D9D9; }
+  height: .2rem;
+  margin: 3.4rem 0; }
 
 /* ==========================================================================
-  Shared styles between c-display and c-content
+  Shared styles between c-content and c-text
    ========================================================================== */
 /* Tables
    ========================================================================== */
-.c-display table,
-.c-content table {
+.c-content table,
+.c-text table {
   width: 100%;
   margin: 1.5rem 0; }
 
-.c-display table td,
-.c-display table th,
 .c-content table td,
-.c-content table th {
+.c-content table th,
+.c-text table td,
+.c-text table th {
   padding: 0.8rem; }
 
-.c-display table th,
-.c-content table th {
+.c-content table th,
+.c-text table th {
   border-bottom: 0.2rem solid #CCCCCC;
   font-weight: 500;
   text-align: left; }
 
-.c-display table th[scope="row"],
-.c-content table th[scope="row"] {
+.c-content table th[scope="row"],
+.c-text table th[scope="row"] {
   border-bottom: 0.1rem solid #CCCCCC;
   border-right: 0.2rem solid #CCCCCC; }
 
-.c-display table td,
-.c-content table td {
+.c-content table td,
+.c-text table td {
   border-bottom: 1px solid #E5E5E5; }
 
-.c-display table tr:last-child td,
-.c-display table tr:last-child th[scope="row"],
 .c-content table tr:last-child td,
-.c-content table tr:last-child th[scope="row"] {
+.c-content table tr:last-child th[scope="row"],
+.c-text table tr:last-child td,
+.c-text table tr:last-child th[scope="row"] {
   border-bottom: none; }
 
 /* Code blocks
    ========================================================================== */
-.c-display pre,
-.c-content pre {
+.c-content pre,
+.c-text pre {
   background: #F2F2F2;
-  padding: 1.6rem;
+  padding: 0.8rem 1.2rem;
   font-size: 1.4rem;
   font-weight: 400;
   overflow: auto; }
 
-.c-display pre,
-.c-display code,
 .c-content pre,
-.c-content code {
+.c-content code,
+.c-text pre,
+.c-text code {
   font-family: Consolas, "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
   white-space: pre;
   word-spacing: normal;
   word-break: normal;
   word-wrap: normal; }
 
-.c-display code,
-.c-content code {
+.c-content code,
+.c-text code {
   background: #F2F2F2;
   padding: 0.2rem;
   border-radius: 0.2rem;
-  font-size: 85%;
-  color: #333333; }
+  font-size: 95%;
+  color: #000000; }
 
 /* Block and inline quotes
    ========================================================================== */
-.c-display blockquote,
-.c-content blockquote {
+.c-content blockquote,
+.c-text blockquote {
   font-style: italic;
   padding-left: 1.5rem;
   margin-left: 0.2rem;
   border-left: 0.4rem solid #E5E5E5; }
 
-.c-display .c-block-quote--enable-auto-quotes p:first-child:before,
-.c-content .c-block-quote--enable-auto-quotes p:first-child:before {
+.c-content .c-block-quote--enable-auto-quotes p:first-child:before,
+.c-text .c-block-quote--enable-auto-quotes p:first-child:before {
   content: open-quote; }
 
-.c-display .c-block-quote--enable-auto-quotes p:last-of-type:after,
-.c-content .c-block-quote--enable-auto-quotes p:last-of-type:after {
+.c-content .c-block-quote--enable-auto-quotes p:last-of-type:after,
+.c-text .c-block-quote--enable-auto-quotes p:last-of-type:after {
   content: close-quote; }
 
-.c-display blockquote cite,
-.c-content blockquote cite {
+.c-content blockquote cite,
+.c-text blockquote cite {
   text-transform: uppercase;
   font-style: normal;
   font-size: 85%;
   letter-spacing: .1rem; }
 
-.c-display strong,
-.c-content strong {
+.c-content strong,
+.c-text strong {
   font-weight: 500; }
 
-.c-display .c-button,
-.c-content .c-button {
+.c-content .c-button,
+.c-text .c-button {
   text-decoration: none; }
 
-.c-display *,
-.c-content * {
+.c-content *,
+.c-text * {
   quotes: "“" "”"; }
 
-.c-display *[lang="fr"] *,
-.c-content *[lang="fr"] * {
+.c-content *[lang="fr"] *,
+.c-text *[lang="fr"] * {
   quotes: "«" "»"; }
 
-.c-display *[lang="de"] *,
-.c-content *[lang="de"] * {
+.c-content *[lang="de"] *,
+.c-text *[lang="de"] * {
   quotes: "»" "«"; }
 
-.c-display q:before,
-.c-content q:before {
+.c-content q:before,
+.c-text q:before {
   content: open-quote; }
 
-.c-display q:after,
-.c-content q:after {
+.c-content q:after,
+.c-text q:after {
   content: close-quote; }
 
 /* Definition list
    ========================================================================== */
-.c-display dl,
-.c-content dl {
+.c-content dl,
+.c-text dl {
   margin: 3.2rem 0; }
-  .c-display dl dt,
-  .c-content dl dt {
+  .c-content dl dt,
+  .c-text dl dt {
     font-weight: 500;
     margin: 0 0 0.8rem; }
-    .c-display dl dt a,
-    .c-content dl dt a {
+    .c-content dl dt a,
+    .c-text dl dt a {
       font-weight: 400; }
-  .c-display dl dd,
-  .c-content dl dd {
+  .c-content dl dd,
+  .c-text dl dd {
     margin: 0 0 3.2rem 3.2rem; }
 
 /* Superscript and subscript
    ========================================================================== */
-.c-display sup,
-.c-display sub,
 .c-content sup,
-.c-content sub {
+.c-content sub,
+.c-text sup,
+.c-text sub {
   font-size: 1.2rem;
   line-height: 0;
   position: relative; }
 
-.c-display sup,
-.c-content sup {
+.c-content sup,
+.c-text sup {
   top: -1rem; }
 
-.c-display sub,
-.c-content sub {
+.c-content sub,
+.c-text sub {
   bottom: -.6rem; }
 
 /* ==========================================================================
@@ -1290,7 +1304,9 @@ abbr[title] {
   cursor: pointer; }
 
 .c-accordion__item .c-accordion__item-title {
-  font-weight: 500; }
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #000000; }
 
 .c-accordion__item .c-accordion__item-header .c-button {
   margin-right: .4rem; }
@@ -1349,7 +1365,7 @@ abbr[title] {
 .c-alert.c-alert--large {
   max-width: 88rem; }
 
-.c-alert__message .c-content p:only-child {
+.c-alert__message .c-text p:only-child {
   margin: 0; }
 
 .c-alert.c-alert--full {
@@ -1447,12 +1463,11 @@ abbr[title] {
 .c-app-layout-inner__sidebar {
   width: 100%;
   flex: 0 0 auto;
-  padding: 2.4rem; }
+  padding: 0 2.4rem; }
   @media (min-width: 700px) {
     .c-app-layout-inner__sidebar {
       height: 100%;
-      width: 32rem;
-      border-right: 0.1rem solid #E5E5E5; } }
+      width: 32rem; } }
   @media (max-width: 699px) {
     .c-app-layout-inner__sidebar {
       border-bottom: 0.1rem solid #E5E5E5; } }
@@ -1556,7 +1571,6 @@ abbr[title] {
 /* Image variant
    ========================================================================== */
 .c-avatar--img {
-  border: 0.1rem solid #B3B3B3;
   overflow: hidden; }
   .c-avatar--img img {
     width: 100%;
@@ -1742,6 +1756,15 @@ abbr[title] {
 /* ==========================================================================
   c-bordered-list-horizontal
    ========================================================================== */
+.c-list-horizontal {
+  display: flex; }
+  .c-list-horizontal li {
+    padding: .4rem 0.84rem; }
+    .c-list-horizontal li:first-child {
+      padding-left: 0rem; }
+    .c-list-horizontal li a, .c-list-horizontal li span {
+      display: block; }
+
 .c-bordered-list-horizontal {
   display: flex; }
   .c-bordered-list-horizontal li {
@@ -1791,13 +1814,11 @@ abbr[title] {
   text-decoration: none;
   cursor: pointer;
   vertical-align: middle;
-  border-radius: 0.3rem;
-  padding: 0.7rem 1.6rem;
+  padding: 1.6rem 3.2rem;
   font-size: 1.6rem;
   text-align: center;
   align-items: center;
   justify-content: center;
-  font-weight: 500;
   display: inline-flex; }
   .c-button .o-svg-icon {
     height: 2rem;
@@ -1869,7 +1890,7 @@ input.c-button {
 /* Icon-only Button (Square)
     ========================================================================== */
 .c-button--icon {
-  padding: 0.7rem; }
+  padding: 1.7rem; }
   .c-button--icon.c-button--small {
     padding: 0.4rem; }
 
@@ -1937,9 +1958,9 @@ input.c-button {
 /* Secondary
    ========================================================================== */
 .c-button--secondary {
-  border: 1px solid #808080;
+  border: 2px solid #000000;
   background: #fff;
-  color: #333333; }
+  color: #000000; }
   .c-button--secondary svg * {
     fill: #595959; }
   .c-button--secondary:hover, .c-button--secondary.c-button--hover {
@@ -1992,24 +2013,29 @@ input.c-button {
 
 /* Shared disabled state for primary and secondary buttons
    ========================================================================== */
-*[disabled] .c-button--primary,
 *[disabled] .c-button--secondary,
-.c-button--primary[disabled],
 .c-button--secondary[disabled],
-.c-button--primary:disabled,
 .c-button--secondary:disabled,
 .c-button--disabled {
-  background: #E5E5E5;
-  border-color: #E5E5E5;
+  border-color: #808080;
   color: #999999;
   pointer-events: none; }
-  *[disabled] .c-button--primary svg *,
   *[disabled] .c-button--secondary svg *,
-  .c-button--primary[disabled] svg *,
   .c-button--secondary[disabled] svg *,
-  .c-button--primary:disabled svg *,
   .c-button--secondary:disabled svg *,
   .c-button--disabled svg * {
+    fill: #999999; }
+
+*[disabled] .c-button--primary,
+.c-button--primary[disabled],
+.c-button--primary:disabled {
+  border-color: #808080;
+  background: #808080;
+  color: #FFFFFF;
+  pointer-events: none; }
+  *[disabled] .c-button--primary svg *,
+  .c-button--primary[disabled] svg *,
+  .c-button--primary:disabled svg * {
     fill: #999999; }
 
 /* Shared loading state for primary and secondary buttons
@@ -2076,7 +2102,7 @@ input.c-button {
       fill: #999999; }
 
 .c-button--borderless {
-  color: #333333; }
+  color: #000000; }
   .c-button--borderless:hover, .c-button--borderless.c-button--hover {
     color: #1A1A1A;
     background: transparent; }
@@ -2174,7 +2200,7 @@ input.c-button {
    ========================================================================== */
 .c-card {
   display: block;
-  color: #333333;
+  color: #000000;
   text-decoration: none;
   position: relative;
   height: 100%;
@@ -2249,7 +2275,7 @@ a.c-card:hover {
     flex: 1 1 auto;
     line-height: 20px;
     width: 100%;
-    color: #333333;
+    color: #000000;
     font-size: 1.6rem; }
 
 /* Shared styles
@@ -2576,7 +2602,7 @@ a.c-card:hover {
   font-size: 1.4rem;
   line-height: 2rem;
   border-radius: 4rem;
-  color: #333333;
+  color: #000000;
   text-decoration: none;
   width: 100%;
   align-items: center; }
@@ -2661,6 +2687,45 @@ a.c-card:hover {
   .c-file-upload__content .c-button {
     position: relative; }
 
+.c-file-upload__simple {
+  border: 0.2rem dashed #B3B3B3;
+  border-radius: 0.3rem;
+  width: 100%;
+  padding: 0rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  min-height: 12rem; }
+  .c-file-upload__simple input[type="file"]::file-selector-button {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    text-decoration: none;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-left: 1rem;
+    padding: 1.6rem 3.2rem;
+    font-size: 1.6rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    border: 0.2rem solid black; }
+  .c-file-upload__simple label {
+    display: block;
+    height: 12rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+
+.c-file-upload__simple label:hover {
+  background-color: #F9F9F9;
+  cursor: pointer; }
+
 .c-file-upload__status {
   margin-bottom: 1.6rem;
   display: flex;
@@ -2696,7 +2761,7 @@ a.c-card:hover {
 
 .c-filter-pill__label {
   line-height: 1;
-  color: #333333; }
+  color: #000000; }
 
 .c-filter-pill__counter {
   font-size: 1.2rem;
@@ -2781,6 +2846,13 @@ a.c-card:hover {
   border: none;
   border-bottom: 1px solid #D9D9D9; }
 
+.c-hr-short {
+  background: black;
+  width: 12.8rem;
+  border: none;
+  height: .2rem;
+  margin: 3.4rem 0; }
+
 /* ==========================================================================
   Component: c-icon-list
    ========================================================================== */
@@ -2812,9 +2884,9 @@ a.c-card:hover {
 /* Component
    ========================================================================== */
 .c-input {
-  border-radius: 0.3rem;
-  background: #fff;
-  border: 1px solid #CCCCCC;
+  background: #f4f4f4;
+  border: 1px solid #f4f4f4;
+  border-bottom: 1px solid #ddd;
   font-size: inherit;
   height: 3.6rem;
   padding: 0.8rem;
@@ -2824,8 +2896,8 @@ a.c-card:hover {
           appearance: none; }
   .c-input:focus {
     outline: 0;
-    border-color: #1267FB;
-    box-shadow: inset 0 0 0 0.1rem #1267FB; }
+    border-color: blue;
+    box-shadow: inset 0 0 0 0.1rem blue; }
   .c-input:-ms-input-placeholder {
     color: #999999; }
   .c-input::placeholder {
@@ -2897,31 +2969,24 @@ textarea.c-input--h-large {
   height: 3.6rem;
   width: 3.6rem;
   min-width: 3.6rem;
-  color: #808080;
-  background: #F2F2F2;
+  color: black;
+  background: #ddd;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 0.8rem;
-  border: 1px solid #CCCCCC;
+  border: 1px solid #f4f4f4;
+  border-bottom: 1px solid #ddd;
   position: absolute; }
 
 .c-input-group__prepend {
-  border-radius: 0.4rem 0 0 0.4rem;
   border-right: none; }
   .c-input-group__prepend ~ .c-input-group__input {
     margin-left: 36px; }
 
 .c-input-group__append {
-  border-radius: 0 0.4rem 0.4rem 0;
   border-left: none;
   right: 0; }
-
-.c-input-group > .c-input-group__input:not(:last-child) .c-input {
-  border-radius: 0.4rem 0 0 0.4rem; }
-
-.c-input-group > .c-input-group__input:not(:first-child) .c-input {
-  border-radius: 0 0.4rem 0.4rem 0; }
 
 .c-input-group--error .c-input-group__append,
 .c-input-group--error .c-input-group__prepend,
@@ -3037,6 +3102,31 @@ textarea.c-input--h-large {
 .c-key-value--very-long .c-key-value-item__key {
   flex: 0 0 75%; }
 
+/* Leader lines. Code from
+ * https://markentier.tech/posts/2021/03/responsive-toc-leader-lines-with-css/
+ */
+.c-leader-line {
+  display: grid;
+  grid-template-columns: auto -webkit-max-content;
+  grid-template-columns: auto max-content;
+  grid-template-areas: "a b";
+  align-items: end;
+  gap: 0 .25rem; }
+
+.c-leader-line-a {
+  grid-area: a;
+  position: relative;
+  overflow: hidden; }
+
+.c-leader-line-a::after {
+  position: absolute;
+  padding-left: .25ch;
+  content: " . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . . . . ";
+  text-align: right; }
+
+.c-leader-line-b {
+  grid-area: b; }
+
 /* ==========================================================================
    Component: Menu
    ---
@@ -3048,13 +3138,11 @@ textarea.c-input--h-large {
       ========================================================================== */
 .c-menu {
   background: #fff;
-  border: 1px solid #CCCCCC;
-  border-radius: 0.3rem;
-  filter: drop-shadow(0 0 0.5rem rgba(33, 33, 33, 0.25));
-  color: #333333;
+  border: 2px solid #DDD;
+  color: black;
   min-width: 10rem;
   opacity: 0;
-  padding: 0.4rem 0;
+  padding: 0;
   position: absolute;
   visibility: hidden;
   pointer-events: none;
@@ -3162,16 +3250,16 @@ textarea.c-input--h-large {
   z-index: 30;
   border-bottom: 1px solid #E5E5E5; }
 
-.c-navbar--main {
+.c-navbar--page {
   padding-left: 0;
   padding-right: 0;
   margin-bottom: 1.6rem; }
-  .c-navbar--main .c-toolbar__right {
+  .c-navbar--page .c-toolbar__right {
     z-index: 61; }
   @media (min-width: 900px) {
-    .c-navbar--main {
-      margin: 3.2rem 0;
-      height: 8rem; } }
+    .c-navbar--page {
+      margin: 2.65rem 0;
+      height: 6.7rem; } }
 
 .c-navbar--scrollable {
   overflow-x: auto;
@@ -3193,7 +3281,8 @@ textarea.c-input--h-large {
   border-top: 0.1rem solid #E5E5E5; }
 
 .c-navbar--bordered-bottom {
-  border-bottom: 0.1rem solid #E5E5E5; }
+  border-bottom: 0.2rem solid black;
+  border-style: none none dashed; }
 
 /* Sizes
    ========================================================================== */
@@ -3204,7 +3293,7 @@ textarea.c-input--h-large {
   height: 5.6rem; }
 
 .c-navbar--large {
-  height: 8rem; }
+  height: 6.7rem; }
 
 /* ==========================================================================
   c-or
@@ -3252,7 +3341,7 @@ textarea.c-input--h-large {
   align-items: center;
   border-radius: 0.4rem;
   text-decoration: none;
-  color: #333333;
+  color: #000000;
   background: #F9F9F9; }
   .c-pagination__link:hover, .c-pagination__link:active, .c-pagination__link:focus {
     background-color: #E5E5E5; }
@@ -3294,15 +3383,13 @@ textarea.c-input--h-large {
 /* Standard component construction
    ========================================================================== */
 .c-panel {
-  background-color: #FFF;
-  border-radius: 0.4rem;
-  border: 1px solid #D9D9D9; }
+  border: 0.2rem solid #000000; }
 
 .c-panel__body {
   padding: 2.4rem; }
 
 .c-panel__body + .c-panel__body {
-  border-top: 1px solid #D9D9D9; }
+  border-top: 1px solid #000000; }
 
 .c-panel__header {
   display: flex;
@@ -3311,11 +3398,11 @@ textarea.c-input--h-large {
   padding: 0 2.4rem;
   background: #F9F9F9;
   border-radius: 0.4rem 0.4rem 0 0;
-  border-bottom: 1px solid #D9D9D9; }
+  border-bottom: 1px solid #000000; }
 
 .c-panel__title {
   font-size: 1.8rem;
-  font-weight: 500;
+  font-weight: 600;
   color: #000000; }
 
 /* When panels meet tables
@@ -3377,7 +3464,7 @@ textarea.c-input--h-large {
 .c-pill-navigation__item > button {
   display: block;
   padding: .8rem 1.6rem;
-  color: #333333;
+  color: black;
   font-weight: 500; }
   .c-pill-navigation__item > a:hover, .c-pill-navigation__item > a:active, .c-pill-navigation__item > a:focus,
   .c-pill-navigation__item > button:hover,
@@ -3386,7 +3473,7 @@ textarea.c-input--h-large {
     background: #F9F9F9; }
 
 .c-pill-navigation__item--has-child-menu > button {
-  padding: .8rem 2.8rem .8rem 1.6rem;
+  padding: .8rem 1.6rem .8rem 2.8rem;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -3396,16 +3483,16 @@ textarea.c-input--h-large {
   margin: 0;
   cursor: pointer;
   line-height: 1.5; }
-  .c-pill-navigation__item--has-child-menu > button:after {
+  .c-pill-navigation__item--has-child-menu > button:before {
     pointer-events: none;
     content: ' ';
     position: absolute;
-    right: 1.4rem;
-    top: 1.8rem;
+    left: 1.4rem;
+    top: 2.0rem;
     width: 0;
     height: 0;
     border-width: 1rem;
-    border: 0.5rem solid #808080;
+    border: 0.5rem solid black;
     border-bottom-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent; }
@@ -3507,16 +3594,15 @@ textarea.c-input--h-large {
           appearance: none;
   background: #fff;
   border: 1px solid #CCCCCC;
-  border-radius: 0.3rem;
   font-size: inherit;
   height: 3.6rem;
-  color: #333333;
+  color: #000000;
   padding: 0.8rem 2.8rem 0.8rem 0.8rem;
   width: 100%; }
   .c-select:focus {
     outline: 0;
-    border-color: #1267FB;
-    box-shadow: inset 0 0 0 0.1rem #1267FB; }
+    border-color: blue;
+    box-shadow: inset 0 0 0 0.1rem blue; }
 
 *[disabled] .c-select,
 .c-select[disabled] {
@@ -3569,14 +3655,13 @@ textarea.c-input--h-large {
 /* Component
    ========================================================================== */
 .c-select-custom {
-  color: #333333;
+  color: #000000;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
   text-align: left;
   background: #fff;
   border: 1px solid #CCCCCC;
-  border-radius: 0.3rem;
   position: relative;
   height: 3.6rem;
   font-size: inherit;
@@ -3587,8 +3672,8 @@ textarea.c-input--h-large {
   overflow: auto; }
   .c-select-custom:focus {
     outline: 0;
-    border-color: #1267FB;
-    box-shadow: inset 0 0 0 0.1rem #1267FB; }
+    border-color: blue;
+    box-shadow: inset 0 0 0 0.1rem blue; }
   .c-select-custom:after {
     pointer-events: none;
     content: ' ';
@@ -3633,19 +3718,19 @@ textarea.c-input--h-large {
   c-side-menu
   ========================================================================== */
 .c-side-menu {
-  border: 0.1rem solid #E5E5E5;
-  border-radius: 0.3rem; }
+  background-color: #f4f4f4;
+  padding: 1.6rem; }
 
 .c-side-menu + .c-side-menu {
   margin-top: 2.4rem; }
 
 .c-side-menu__item + .c-side-menu__item {
-  border-top: 0.1rem solid #E5E5E5; }
+  border-top: 0.1rem solid rgba(0, 0, 0, 0.1); }
 
 .c-side-menu__link {
   text-decoration: none;
   padding: 1.2rem 2.4rem;
-  color: #333333;
+  color: black;
   align-items: center;
   display: flex;
   position: relative; }
@@ -3655,29 +3740,13 @@ textarea.c-input--h-large {
     z-index: 2; }
 
 .c-side-menu__item--active > .c-side-menu__link {
-  background: #fff;
-  color: #1A1A1A; }
+  background: #efefef;
+  color: black; }
   .c-side-menu__item--active > .c-side-menu__link:before {
-    content: '';
-    height: calc(100% + 0.2rem);
-    width: 0.5rem;
+    content: '→';
     position: absolute;
-    left: -0.1rem;
-    top: -0.1rem;
-    bottom: -0.1rem;
-    background: #FF4054; }
-
-.c-side-menu__item:first-child .c-side-menu__link {
-  border-radius: 0.3rem 0.3rem 0 0; }
-
-.c-side-menu__item:first-child.c-side-menu__item--active .c-side-menu__link:before {
-  border-top-left-radius: 0.3rem; }
-
-.c-side-menu__item:last-child .c-side-menu__link {
-  border-radius: 0 0 0.3rem 0.3rem; }
-
-.c-side-menu__item:last-child.c-side-menu__item--active .c-side-menu__link:before {
-  border-bottom-left-radius: 0.3rem; }
+    left: 0.6rem;
+    top: 1.2rem; }
 
 /* ==========================================================================
   c-loader
@@ -4025,7 +4094,7 @@ textarea.c-input--h-large {
   border-radius: 0.3rem;
   padding: 1rem 1.2rem;
   display: block;
-  color: #333333;
+  color: #000000;
   font-size: 1.6rem;
   line-height: 1.5;
   width: 100%; }
@@ -4035,8 +4104,8 @@ textarea.c-input--h-large {
     color: #999999; }
   .c-textarea:focus {
     outline: 0;
-    border-color: #1267FB;
-    box-shadow: inset 0 0 0 0.1rem #1267FB; }
+    border-color: blue;
+    box-shadow: inset 0 0 0 0.1rem blue; }
 
 *[disabled] .c-textarea,
 .c-textarea[disabled] {
@@ -4077,7 +4146,7 @@ textarea.c-input--h-large {
   height: 5.6rem; }
 
 .c-toolbar--large {
-  height: 8rem; }
+  height: 6.7rem; }
 
 .c-toolbar--spaced {
   padding: 0 2.4rem; }
@@ -4134,7 +4203,7 @@ textarea.c-input--h-large {
 /* Specific children
    ========================================================================== */
 .c-toolbar__title {
-  font-weight: 500;
+  font-weight: 600;
   color: #000000;
   font-size: 2.2rem; }
 
@@ -4242,8 +4311,8 @@ textarea.c-input--h-large {
 .c-user-navigation {
   display: flex;
   align-items: center;
-  padding: .4rem 2.8rem .4rem 1.6rem;
-  color: #333333;
+  padding: .4rem 1.6rem .4rem 2.8rem;
+  color: #000000;
   position: relative;
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -4254,16 +4323,16 @@ textarea.c-input--h-large {
   cursor: pointer; }
   .c-user-navigation .c-avatar {
     margin-right: 0.4rem; }
-  .c-user-navigation:after {
+  .c-user-navigation:before {
     pointer-events: none;
     content: ' ';
     position: absolute;
-    right: 1.4rem;
+    left: 1.4rem;
     top: 1.8rem;
     width: 0;
     height: 0;
     border-width: 1rem;
-    border: 0.5rem solid #808080;
+    border: 0.5rem solid black;
     border-bottom-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent; }
@@ -4352,7 +4421,7 @@ textarea.c-input--h-large {
       background: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' fill-rule='evenodd' clip-rule='evenodd' stroke-linejoin='round' stroke-miterlimit='1.414'%3E%3Cpath fill='none' d='M0 0h16v16H0z'/%3E%3CclipPath id='a'%3E%3Cpath d='M0 0h16v16H0z'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23a)'%3E%3Cpath d='M11.69 4.675l-.443.424L6.77 9.575 4.752 7.558l-.442-.422L3.445 8l.423.442 2.46 2.46.442.423.442-.423 4.92-4.92.423-.442-.865-.865z' fill='%23fff'/%3E%3C/g%3E%3C/svg%3E") no-repeat; }
 
 .c-wizard--active {
-  color: #333333; }
+  color: #000000; }
   .c-wizard--active:after {
     background-color: #000000; }
   .c-wizard--active .c-wizard__indicator {
@@ -4418,7 +4487,7 @@ textarea.c-input--h-large {
     display: block;
     padding: .8rem 1.2rem .8rem 1.2rem;
     position: relative;
-    color: #333333; }
+    color: #000000; }
   .c-design-system-nav__mobile li.selected a:before {
     content: '';
     height: 100%;
@@ -4522,6 +4591,40 @@ textarea.c-input--h-large {
 .u-bg-gray-50 {
   background: #F2F2F2; }
 
+.mq {
+  position: fixed;
+  top: 0.2rem;
+  right: 2.4rem; }
+
+.mq:after {
+  content: ' default'; }
+
+@media (min-width: 400px) {
+  .mq:after {
+    content: " 400px+"; } }
+
+@media (min-width: 700px) {
+  .mq:after {
+    content: " 700px+"; } }
+
+@media (min-width: 900px) {
+  .mq:after {
+    content: " 900px+"; } }
+
+@media (min-width: 1200px) {
+  .mq:after {
+    content: " 1200px+"; } }
+
+@media (min-width: 900px) {
+  .mq {
+    right: 3.2rem; } }
+
+.bg-dimensions {
+  background: no-repeat url("/images/ruler.svg"); }
+
+.bg-bands {
+  background: no-repeat url("/images/2560x1440-bands.svg"); }
+
 /**
  * Utility: Generic
  * ===
@@ -4598,7 +4701,7 @@ textarea.c-input--h-large {
 
 .u-remove-link-styling a,
 .u-remove-link-styling {
-  color: #333333; }
+  color: #000000; }
 
 .u-border-top {
   border-top: 1px solid #E5E5E5; }
@@ -4624,6 +4727,29 @@ textarea.c-input--h-large {
 
 .u-link-muted {
   color: inherit; }
+
+.u-placeholder-xs,
+.u-placeholder-s,
+.u-placeholder,
+.u-placeholder-l,
+.u-placeholder-xl {
+  width: 100%;
+  background-color: #FFFF00; }
+
+.u-placeholder-xs {
+  height: 0.4rem !important; }
+
+.u-placeholder-s {
+  height: 0.8rem !important; }
+
+.u-placeholder {
+  height: 1.6rem !important; }
+
+.u-placeholder-l {
+  height: 2.4rem !important; }
+
+.u-placeholder-xl {
+  height: 3.2rem !important; }
 
 /* ==========================================================================
   Utility: spacing
@@ -4757,6 +4883,12 @@ textarea.c-input--h-large {
 
 .u-spacer-bottom-xl {
   margin-bottom: 3.2rem !important; }
+
+.u-spacer-bottom-xxl {
+  margin-bottom: 4.8rem !important; }
+
+.u-spacer-bottom-xxxl {
+  margin-bottom: 5.6rem !important; }
 
 .u-spacer-bottom-auto {
   margin-bottom: auto !important; }
