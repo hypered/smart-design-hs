@@ -112,8 +112,6 @@ library
     Smart.Html.Textarea
     Smart.Html.Wizard
 
-    Smart.Html.Pages.LandingPage
-
     Smart.Html.Render
 
     -- Server side modules: used for wiring in actual pages, for example.
